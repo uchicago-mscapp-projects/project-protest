@@ -10,6 +10,7 @@ def load_data():
     for filename in csv_files:
         df = pd.read_csv(filename)
         li.append(df)
+
     df = (pd.concat(li, axis=0, ignore_index=True)).fillna('')
     # combine EstimateLow and size_low cols into new col Estimate_Low. 
     # Drop old cols EstimateLow and size_low cols
@@ -17,7 +18,6 @@ def load_data():
     pd.to_numeric(df['Estimate_Low'], errors='coerce')
     df = df.drop('size_low', axis=1)
     df = df.drop('EstimateLow', axis=1)
-
     # combine EstimateHigh and size_high cols into new col Estimate_High. 
     # Drop old cols EstimateLow and size_low cols
     df['Estimate_High'] = df['EstimateHigh'].astype(str) + df['size_high'].astype(str)
@@ -35,7 +35,7 @@ def load_data():
         else:
             name_concat_lower = 'source'+str(i)
             df = df.drop(name_concat_lower, axis=1)
-   
+
     # remove unnamed cols
     unnamed_merge = chain(range(1,6), range(25, 45))
     for it in unnamed_merge:
@@ -55,7 +55,18 @@ def load_data():
     df['City_Town'] = df['CityTown'].astype(str) + df['City/Town'].astype(str)
     df = df.drop('CityTown', axis=1)
     df = df.drop('City/Town', axis=1)
+
+    cols_to_drop = ['Pro(2)/Anti(1)', 'ReportedArrests', 'ReportedParticipantInjuries', 'TownsCities', 'ReportedPoliceInjuries', 'ReportedPropertyDamage', 'Misc.', 'date', 'valence', 'notes', 'coder', 'Pro2Anti1','TearGas','protest','Crowd Counting Consortium', 'S1', 'S2', 'Pro2-Anti1', 'CountLove', 'AdHoc', 'Misc', 'City']
+    final_columns = []
     for col in df.columns:
-        print(col)
-    
-    return df
+        if col not in cols_to_drop:
+            final_columns.append(col)
+
+    df.drop(columns=df.columns.difference(final_columns), inplace=True)
+    police_terms = ['police', 'black lives', 'civil rights']
+    police_df = df[df['Claim Description'].str.contains('|'.join(police_terms))]
+    df.to_csv("count_data/police-data.csv")
+    # police_df =  df[df['Claim Description'].str.contains('police', 'black lives', 'civil rights')]
+    return police_df
+
+
