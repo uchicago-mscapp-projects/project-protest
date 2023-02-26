@@ -1,0 +1,7 @@
+{
+ "status": "ERROR",
+ "copyright": "Copyright (c) 2023 The New York Times Company. All Rights Reserved.",
+ "errors": [
+  "page: must be less than or equal to 200"
+ ]
+}
