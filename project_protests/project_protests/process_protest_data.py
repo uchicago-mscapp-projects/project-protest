@@ -2,8 +2,11 @@ import os
 import pandas as pd
 import glob
 from itertools import chain
+import numpy as np
 
-def load_data():
+# Monica # 
+
+def process_data():
     folder_dir = "/home/monican/capp30122/30122-project-project-protest/project_protests/count_data"
     csv_files = glob.glob(os.path.join(folder_dir, "*.csv"))
     li = []
@@ -55,18 +58,38 @@ def load_data():
     df['City_Town'] = df['CityTown'].astype(str) + df['City/Town'].astype(str)
     df = df.drop('CityTown', axis=1)
     df = df.drop('City/Town', axis=1)
+    
+    # combining columns
+    df['City_Town'] = df['City_Town'].replace(r'^\s*$', np.nan, regex=True)
+    df['City_Town'] = df.City_Town.fillna(df['locality'])
+    
+    df['Date'] = df['Date'].replace(r'^\s*$', np.nan, regex=True)
+    df['Date'] = df.Date.fillna(df['date'])
+    df['Date'] = pd.to_datetime(police['Date'])
 
-    cols_to_drop = ['Pro(2)/Anti(1)', 'ReportedArrests', 'ReportedParticipantInjuries', 'TownsCities', 'ReportedPoliceInjuries', 'ReportedPropertyDamage', 'Misc.', 'date', 'valence', 'notes', 'coder', 'Pro2Anti1','TearGas','protest','Crowd Counting Consortium', 'S1', 'S2', 'Pro2-Anti1', 'CountLove', 'AdHoc', 'Misc', 'City']
+    df['StateTerritory'] = df['StateTerritory'].replace(r'^\s*$', np.nan, regex=True)
+    df['StateTerritory'] = df.StateTerritory.fillna(df['state'])
+
+    cols_to_drop = ['Pro(2)/Anti(1)', 'locality', 'ReportedArrests', 'ReportedParticipantInjuries', 'TownsCities', 'ReportedPoliceInjuries', 'ReportedPropertyDamage', 'Misc.','date', 'state', 'valence', 'notes', 'coder', 'Pro2Anti1','TearGas','protest','Crowd Counting Consortium', 'S1', 'S2', 'Pro2-Anti1', 'CountLove', 'AdHoc', 'Misc']
     final_columns = []
     for col in df.columns:
         if col not in cols_to_drop:
             final_columns.append(col)
 
     df.drop(columns=df.columns.difference(final_columns), inplace=True)
-    police_terms = ['police', 'black lives', 'civil rights']
+    police_terms = ['police', 'black lives', 'racial justice', 'criminal justice', 'racism', 'white supremacy']
     police_df = df[df['Claim Description'].str.contains('|'.join(police_terms))]
-    df.to_csv("count_data/police-data.csv")
-    # police_df =  df[df['Claim Description'].str.contains('police', 'black lives', 'civil rights')]
+    police_df.to_csv("count_data/police-data.csv")
     return police_df
 
+    # Analysis 
+    def group_by_date(df):
+        return df['Date'].groupby([df.Date.dt.year, df.Date.dt.month]).agg('count')
+    
+    def group_by_locality(df):
 
+        return None
+    
+    def analyze_protest_type(df):
+
+        return None
