@@ -19,7 +19,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/28/timeline-tyre-nichols-police-killing-key-events",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/28/timeline-tyre-nichols-police-killing-key-events",
     "fields": {
-     "headline": "Timeline: Tyre Nichols police killing key events "
+     "trailText": "The death of Nichols, 29, after being beaten by police in Memphis, Tennessee, during a traffic stop has prompted outrage "
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -35,7 +35,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/28/tyre-nichols-protests-marches-police-violence",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/28/tyre-nichols-protests-marches-police-violence",
     "fields": {
-     "headline": "\u2018We\u2019re tired of being beaten\u2019: protesters across US call for justice for Tyre Nichols"
+     "trailText": "After video of the brutal beating was released, people gathered to decry the violence and abuse of power"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -51,7 +51,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/11/black-lives-matter-co-founder-cousin-killed-los-angeles-police",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/11/black-lives-matter-co-founder-cousin-killed-los-angeles-police",
     "fields": {
-     "headline": "Teacher and cousin of Black Lives Matter founder \u2018Tased to death\u2019 by LAPD"
+     "trailText": "\u2018He needed help and was killed,\u2019 says Patrisse Cullors, as police are seen repeatedly using stun gun on him after traffic accident"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -67,7 +67,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/27/shock-horror-reaction-tyre-nichols-death-video",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/27/shock-horror-reaction-tyre-nichols-death-video",
     "fields": {
-     "headline": "\u2018Seared in our memories\u2019: outpouring of shock and horror over Tyre Nichols\u2019s video"
+     "trailText": "Recording of the 29-year-old\u2019s killing has sent shockwaves across the US, with the officers\u2019 conduct being condemned"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -83,7 +83,7 @@
     "webUrl": "https://www.theguardian.com/society/2023/jan/25/real-world-events-trigger-online-hate-toward-unrelated-groups-study-finds",
     "apiUrl": "https://content.guardianapis.com/society/2023/jan/25/real-world-events-trigger-online-hate-toward-unrelated-groups-study-finds",
     "fields": {
-     "headline": "Real-world events trigger online hate toward unrelated groups, study finds"
+     "trailText": "Researchers say finding could help moderators predict when content is likely to be published and what to look out for"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -99,7 +99,7 @@
     "webUrl": "https://www.theguardian.com/music/2022/oct/17/family-of-george-floyd-considers-legal-action-over-kanye-west-comments",
     "apiUrl": "https://content.guardianapis.com/music/2022/oct/17/family-of-george-floyd-considers-legal-action-over-kanye-west-comments",
     "fields": {
-     "headline": "Family of George Floyd considers legal action over Kanye West comments"
+     "trailText": "Rapper alleges on podcast that Floyd died from drug abuse, despite former police officer Derek Chauvin\u2019s conviction for murder"
     },
     "isHosted": false,
     "pillarId": "pillar/arts",
@@ -115,7 +115,7 @@
     "webUrl": "https://www.theguardian.com/us-news/live/2023/jan/27/biden-tyre-nichols-police-video-rnc-politics-latest-updates",
     "apiUrl": "https://content.guardianapis.com/us-news/live/2023/jan/27/biden-tyre-nichols-police-video-rnc-politics-latest-updates",
     "fields": {
-     "headline": "Protests after video of fatal Memphis police beating is released \u2013 as it happened"
+     "trailText": "FBI director says he\u2019s \u2018appalled\u2019 by video of fatal police encounter \u2013 follow all the latest news"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -131,7 +131,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2022/aug/09/ahmaud-arbery-street-signs-georgia",
     "apiUrl": "https://content.guardianapis.com/us-news/2022/aug/09/ahmaud-arbery-street-signs-georgia",
     "fields": {
-     "headline": "Ahmaud Arbery\u2019s home town unveils street signs honoring his memory"
+     "trailText": "Officials designated a 2.7-mile stretch in Brunswick, Georgia, as Honorary Ahmaud Arbery Street, vowing to never forget his death"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -147,7 +147,7 @@
     "webUrl": "https://www.theguardian.com/world/2022/sep/02/black-lives-matter-grassroots-lawsuit-global-foundation",
     "apiUrl": "https://content.guardianapis.com/world/2022/sep/02/black-lives-matter-grassroots-lawsuit-global-foundation",
     "fields": {
-     "headline": "Black Lives Matter grassroots chapters sue global foundation over funds"
+     "trailText": "Coalition sues foundation, alleging mismanagement: \u2018The assets that we built are under control of consultants\u2019"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -163,7 +163,7 @@
     "webUrl": "https://www.theguardian.com/film/2022/dec/09/al-sharpton-documentary-loudmouth",
     "apiUrl": "https://content.guardianapis.com/film/2022/dec/09/al-sharpton-documentary-loudmouth",
     "fields": {
-     "headline": "Al Sharpton: \u2018I learned from James Brown \u2013 you have to be dramatic\u2019"
+     "trailText": "In an inspiring new documentary, the preacher and activist talks about his tireless quest for racial justice and equality"
     },
     "isHosted": false,
     "pillarId": "pillar/arts",
@@ -179,7 +179,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/29/systemic-crisis-tyre-nichols-fatal-beating-by-police-condemned-by-legal-experts",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/29/systemic-crisis-tyre-nichols-fatal-beating-by-police-condemned-by-legal-experts",
     "fields": {
-     "headline": "\u2018Systemic crisis\u2019: Tyre Nichols beating fuels calls for broad police reforms"
+     "trailText": "Officers were not in danger and brutality had no justification, advocates and experts say"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -195,7 +195,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/28/tyre-nichols-memphis-protest-police",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/28/tyre-nichols-memphis-protest-police",
     "fields": {
-     "headline": "Calls to \u2018demolish and rebuild\u2019 police as Memphis mourns Tyre Nichols"
+     "trailText": "The death of the 29-year-old Black man after a traffic stop is not the first such fatality attributed to city law enforcement officers"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -211,7 +211,7 @@
     "webUrl": "https://www.theguardian.com/commentisfree/2023/jan/28/the-killing-of-tyre-nichols-was-heinous-and-shocking-it-was-also-not-an-aberration",
     "apiUrl": "https://content.guardianapis.com/commentisfree/2023/jan/28/the-killing-of-tyre-nichols-was-heinous-and-shocking-it-was-also-not-an-aberration",
     "fields": {
-     "headline": "The killing of Tyre Nichols was heinous and shocking. It was also not an aberration"
+     "trailText": "The majority of Americans have resigned themselves to accepting policing as it currently exists. This must change"
     },
     "isHosted": false,
     "pillarId": "pillar/opinion",
@@ -227,7 +227,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2022/dec/26/biden-review-police-criminal-justice-reform-promises",
     "apiUrl": "https://content.guardianapis.com/us-news/2022/dec/26/biden-review-police-criminal-justice-reform-promises",
     "fields": {
-     "headline": "Biden promised to reform the police. Why has so little progress been made?"
+     "trailText": "Bold campaign promises to reform criminal justice are stymied at the state level and amid partisan point-scoring in Congress"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -243,7 +243,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/27/first-thing-five-ex-police-officers-charged-tyre-nichols-memphis",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/27/first-thing-five-ex-police-officers-charged-tyre-nichols-memphis",
     "fields": {
-     "headline": "First Thing: five ex-police officers charged with murder of Tyre Nichols"
+     "trailText": "Nichols, 29, died three days after a traffic stop in Memphis turned violent. Plus, the rise of queerbaiting accusations"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -259,7 +259,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/26/memphis-police-tyre-nichols-death-what-we-know",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/26/memphis-police-tyre-nichols-death-what-we-know",
     "fields": {
-     "headline": "Tyre Nichols: what we know about his death after Memphis police encounter"
+     "trailText": "City on edge as police department is poised to release video of the deadly encounter after a traffic stop"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -275,7 +275,7 @@
     "webUrl": "https://www.theguardian.com/commentisfree/2023/jan/31/black-men-tyre-nichols-death-not-normal-tayo-bero",
     "apiUrl": "https://content.guardianapis.com/commentisfree/2023/jan/31/black-men-tyre-nichols-death-not-normal-tayo-bero",
     "fields": {
-     "headline": "I\u2019m tired of watching Black men like Tyre Nichols die. This shouldn\u2019t be normal"
+     "trailText": "Viral police brutality videos have become a morbid reminder of the fragility of Black life in America"
     },
     "isHosted": false,
     "pillarId": "pillar/opinion",
@@ -291,7 +291,7 @@
     "webUrl": "https://www.theguardian.com/australia-news/2022/jul/15/police-prosecutor-claimed-case-over-black-lives-matter-rally-was-fatally-flawed-melbourne-court-told",
     "apiUrl": "https://content.guardianapis.com/australia-news/2022/jul/15/police-prosecutor-claimed-case-over-black-lives-matter-rally-was-fatally-flawed-melbourne-court-told",
     "fields": {
-     "headline": "Police prosecutor claimed case over Black Lives Matter rally was \u2018fatally flawed\u2019, Melbourne court told"
+     "trailText": "Officer who allegedly flagged the dropping of charges was not authorised to make that decision, Victoria police tell court"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -307,7 +307,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/27/tyre-nichols-death-memphis-video-police-rodney-king",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/27/tyre-nichols-death-memphis-video-police-rodney-king",
     "fields": {
-     "headline": "Tyre Nichols video worse than Rodney King footage, Memphis police chief says"
+     "trailText": "CJ Davis says department will release \u2018alarming\u2019 video of officers, now charged with murder of black man who died days later"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -323,7 +323,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/26/tyre-nichols-five-ex-police-officers-custody",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/26/tyre-nichols-five-ex-police-officers-custody",
     "fields": {
-     "headline": "Tyre Nichols: five Memphis ex-police officers charged with murder over motorist\u2019s death"
+     "trailText": "Nichols, 29, died three days after a traffic stop turned into a fatal physical attack on 7 January"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -339,7 +339,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/27/tyre-nichols-protest-video-release",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/27/tyre-nichols-protest-video-release",
     "fields": {
-     "headline": "US protests begin after police release footage of fatal beating of Tyre Nichols"
+     "trailText": "Demonstrations in Memphis and other US cities follow release of video and request from Nichols\u2019s mother to \u2018protest in peace\u2019"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -355,7 +355,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/31/tyre-nichols-death-white-officer-preston-hemphill",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/31/tyre-nichols-death-white-officer-preston-hemphill",
     "fields": {
-     "headline": "Tyre Nichols death: white officer\u2019s belated suspension raises questions"
+     "trailText": "Memphis police named and fired all five Black officers involved on 20 January, but waited to reveal Preston Hemphill\u2019s identity"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -371,7 +371,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/26/tyre-nichols-death-memphis-police-killing",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/26/tyre-nichols-death-memphis-police-killing",
     "fields": {
-     "headline": "Tyre Nichols\u2019s death after police encounter was \u2018failing of basic humanity\u2019, says Memphis chief "
+     "trailText": "Memphis police chief says January traffic stop that preceded man\u2019s death was \u2018heinous, reckless, and inhumane\u2019"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -387,7 +387,7 @@
     "webUrl": "https://www.theguardian.com/stage/2023/jan/10/blaccine-first-dose-review",
     "apiUrl": "https://content.guardianapis.com/stage/2023/jan/10/blaccine-first-dose-review",
     "fields": {
-     "headline": "Blaccine: First Dose review \u2013 Black voices speak out about the pandemic"
+     "trailText": "Three monologues, told from a Black British perspective, tackle subjects ranging from distrust of the medical system to the gentrification of Brixton"
     },
     "isHosted": false,
     "pillarId": "pillar/arts",
@@ -403,7 +403,7 @@
     "webUrl": "https://www.theguardian.com/artanddesign/2022/oct/10/painter-amy-sherald-michelle-obama-breonna-taylor-interview",
     "apiUrl": "https://content.guardianapis.com/artanddesign/2022/oct/10/painter-amy-sherald-michelle-obama-breonna-taylor-interview",
     "fields": {
-     "headline": "\u2018Everything I do is saying Black lives matter\u2019: how artist Amy Sherald defined an era"
+     "trailText": "She has painted Michelle Obama and her depiction of Breonna Taylor was called the most important painting of the 21st century. Now, in a new show, Sherald highlights Black subjects who are<strong> </strong>centre stage in America\u2019s historical moments"
     },
     "isHosted": false,
     "pillarId": "pillar/arts",
@@ -419,7 +419,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/06/us-police-killings-record-number-2022",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/06/us-police-killings-record-number-2022",
     "fields": {
-     "headline": "\u2018It never stops\u2019: killings by US police reach record high in 2022"
+     "trailText": "Law enforcement killed at least 1,176 people or about 100 people a month last year, making it the deadliest for police violence"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -435,7 +435,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/30/congress-police-reform-biden-black-caucus-tyre-nichols-death",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/30/congress-police-reform-biden-black-caucus-tyre-nichols-death",
     "fields": {
-     "headline": "Tyre Nichols\u2019s death: seven officers have been removed from duty, police confirm"
+     "trailText": "Two EMTs and a firefighter also fired as lawmakers call for meeting with president and investigation continues"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -451,7 +451,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2022/aug/23/kelly-goodlett-breonna-taylor-guilty-plea-civil-rights-police",
     "apiUrl": "https://content.guardianapis.com/us-news/2022/aug/23/kelly-goodlett-breonna-taylor-guilty-plea-civil-rights-police",
     "fields": {
-     "headline": "Former detective pleads guilty to civil rights violations in Breonna Taylor case"
+     "trailText": "Ex-Louisville detective Kelly Goodlett is first conviction in case of Black woman killed by police in her own home in Kentucky"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -467,7 +467,7 @@
     "webUrl": "https://www.theguardian.com/commentisfree/2022/dec/16/placard-violation-child-q-protest-police-abuse-black-children",
     "apiUrl": "https://content.guardianapis.com/commentisfree/2022/dec/16/placard-violation-child-q-protest-police-abuse-black-children",
     "fields": {
-     "headline": "A placard on the street said all we need to know about the violation of Child Q"
+     "trailText": "The protest against the police abuse of a teenage girl at her school showed that people refuse to tolerate black children being seen as less than human, says teacher and writer Lola Okolosie"
     },
     "isHosted": false,
     "pillarId": "pillar/opinion",
@@ -483,7 +483,7 @@
     "webUrl": "https://www.theguardian.com/uk-news/2022/oct/06/racist-hate-crimes-pass-100000-in-england-and-wales-for-first-time",
     "apiUrl": "https://content.guardianapis.com/uk-news/2022/oct/06/racist-hate-crimes-pass-100000-in-england-and-wales-for-first-time",
     "fields": {
-     "headline": " Racist hate crimes pass 100,000 in England and Wales for first time"
+     "trailText": "Disability, sexual-orientation and religious hate crimes all increased last year while anti-transgender crimes rose by 56%"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -499,7 +499,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/20/elijah-mcclain-death-aurora-colorado-police-officers-chokehold-ketamine",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/20/elijah-mcclain-death-aurora-colorado-police-officers-chokehold-ketamine",
     "fields": {
-     "headline": "Elijah McClain: officers to enter pleas to charges in death of Black man put in chokehold"
+     "trailText": "23-year-old died after Colorado police put him in a chokehold and injected him with a large dose of the powerful sedative ketamine"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -515,7 +515,7 @@
     "webUrl": "https://www.theguardian.com/commentisfree/2023/jan/30/what-would-have-saved-tyre-nichols-life",
     "apiUrl": "https://content.guardianapis.com/commentisfree/2023/jan/30/what-would-have-saved-tyre-nichols-life",
     "fields": {
-     "headline": "What would have saved Tyre Nichols\u2019 life?"
+     "trailText": "All of the reforms that liberals suggest will save Black lives were present in Tyre\u2019s death. So what works?"
     },
     "isHosted": false,
     "pillarId": "pillar/opinion",
@@ -531,23 +531,7 @@
     "webUrl": "https://www.theguardian.com/business/2022/nov/29/american-retailers-pledge-buying-black",
     "apiUrl": "https://content.guardianapis.com/business/2022/nov/29/american-retailers-pledge-buying-black",
     "fields": {
-     "headline": "The #BuyBlack movement had a moment in 2020. Was that all it was?"
-    },
-    "isHosted": false,
-    "pillarId": "pillar/news",
-    "pillarName": "News"
-   },
-   {
-    "id": "us-news/2023/jan/27/tyre-nichols-video-memphis-police-footage-released",
-    "type": "article",
-    "sectionId": "us-news",
-    "sectionName": "US news",
-    "webPublicationDate": "2023-01-28T17:01:35Z",
-    "webTitle": "\u2018I\u2019m just trying to go home\u2019: Tyre Nichols heard pleading in released video",
-    "webUrl": "https://www.theguardian.com/us-news/2023/jan/27/tyre-nichols-video-memphis-police-footage-released",
-    "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/27/tyre-nichols-video-memphis-police-footage-released",
-    "fields": {
-     "headline": "\u2018I\u2019m just trying to go home\u2019: Tyre Nichols heard pleading in released video"
+     "trailText": "Representation in retail became an urgent concern, but two years later Black businesses still face many of the same challenges"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -563,11 +547,27 @@
     "webUrl": "https://www.theguardian.com/culture/2023/jan/31/jimmy-kimmel-trump-stephen-colbert-seth-meyers-late-night",
     "apiUrl": "https://content.guardianapis.com/culture/2023/jan/31/jimmy-kimmel-trump-stephen-colbert-seth-meyers-late-night",
     "fields": {
-     "headline": "Kimmel on Trump 2024: \u2018Kind of sad \u2013 like when Michael Jordan went to play for the Wizards\u2019"
+     "trailText": "Late-night hosts discuss Trump\u2019s 2024 campaign, even more George Santos lies and the police killing of Tyre Nichols"
     },
     "isHosted": false,
     "pillarId": "pillar/arts",
     "pillarName": "Arts"
+   },
+   {
+    "id": "us-news/2023/jan/27/tyre-nichols-video-memphis-police-footage-released",
+    "type": "article",
+    "sectionId": "us-news",
+    "sectionName": "US news",
+    "webPublicationDate": "2023-01-28T17:01:35Z",
+    "webTitle": "\u2018I\u2019m just trying to go home\u2019: Tyre Nichols heard pleading in released video",
+    "webUrl": "https://www.theguardian.com/us-news/2023/jan/27/tyre-nichols-video-memphis-police-footage-released",
+    "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/27/tyre-nichols-video-memphis-police-footage-released",
+    "fields": {
+     "trailText": "The grisly footage, released in four parts, indicates an ambulance did not arrive for more than 20 minutes after the vicious beating"
+    },
+    "isHosted": false,
+    "pillarId": "pillar/news",
+    "pillarName": "News"
    },
    {
     "id": "culture/2022/nov/17/suren-jayemanne-the-10-funniest-things-i-have-ever-seen-on-the-internet",
@@ -579,7 +579,7 @@
     "webUrl": "https://www.theguardian.com/culture/2022/nov/17/suren-jayemanne-the-10-funniest-things-i-have-ever-seen-on-the-internet",
     "apiUrl": "https://content.guardianapis.com/culture/2022/nov/17/suren-jayemanne-the-10-funniest-things-i-have-ever-seen-on-the-internet",
     "fields": {
-     "headline": "Suren Jayemanne: the 10 funniest things I have ever seen (on the internet)"
+     "trailText": "The Australian comedian shares what makes him laugh online, including one man\u2019s sex playlist, a mashup of Seinfeld and the Sopranos, and David Guetta\u2019s George Floyd tribute"
     },
     "isHosted": false,
     "pillarId": "pillar/arts",
@@ -595,7 +595,7 @@
     "webUrl": "https://www.theguardian.com/us-news/2022/oct/24/george-floyd-minneapolis-police-officer-j-alexander-kueng-pleads-guilty",
     "apiUrl": "https://content.guardianapis.com/us-news/2022/oct/24/george-floyd-minneapolis-police-officer-j-alexander-kueng-pleads-guilty",
     "fields": {
-     "headline": "Ex-Minneapolis officer pleads guilty to abetting murder of George Floyd"
+     "trailText": "J Alexander Kueng to serve 3.5 years in prison to run concurrently with previous sentence he was given in federal trial"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -611,7 +611,7 @@
     "webUrl": "https://www.theguardian.com/music/commentisfree/2022/oct/07/kanye-west-white-lives-matter-tucker-carlson",
     "apiUrl": "https://content.guardianapis.com/music/commentisfree/2022/oct/07/kanye-west-white-lives-matter-tucker-carlson",
     "fields": {
-     "headline": "His white lives matter shirt and Tucker Carlson appearance prove it: Kanye West doesn\u2019t want a way back"
+     "trailText": "The musician\u2019s latest controversies remind us who he\u2019s been this whole time: a guy who will do anything to be relevant"
     },
     "isHosted": false,
     "pillarId": "pillar/arts",
@@ -627,7 +627,7 @@
     "webUrl": "https://www.theguardian.com/tv-and-radio/2022/aug/22/katrina-babies-documentary-edward-buckles-new-orleans",
     "apiUrl": "https://content.guardianapis.com/tv-and-radio/2022/aug/22/katrina-babies-documentary-edward-buckles-new-orleans",
     "fields": {
-     "headline": "\u2018I didn\u2019t understand my trauma\u2019: how Hurricane Katrina marked New Orleans\u2019 young"
+     "trailText": "In powerful documentary Katrina Babies, the children and teenagers who lived through the 2005 disaster grapple with their trauma at an older age"
     },
     "isHosted": false,
     "pillarId": "pillar/arts",
@@ -643,7 +643,7 @@
     "webUrl": "https://www.theguardian.com/books/2022/may/28/seen-and-unseen-book-review-george-floyd-black-twitter-racial-justice",
     "apiUrl": "https://content.guardianapis.com/books/2022/may/28/seen-and-unseen-book-review-george-floyd-black-twitter-racial-justice",
     "fields": {
-     "headline": "Seen and Unseen review: George Floyd, Black Twitter and the fight for racial justice"
+     "trailText": "Marc Lamont Hill and Todd Brewster\u2019s brilliant book considers the history of communications technology in a racist society"
     },
     "isHosted": false,
     "pillarId": "pillar/arts",
@@ -659,7 +659,7 @@
     "webUrl": "https://www.theguardian.com/australia-news/2022/nov/06/caught-between-black-and-blue-senior-queensland-police-officer-reveals-the-racism-that-broke-him",
     "apiUrl": "https://content.guardianapis.com/australia-news/2022/nov/06/caught-between-black-and-blue-senior-queensland-police-officer-reveals-the-racism-that-broke-him",
     "fields": {
-     "headline": "Caught between black and blue: senior Queensland police officer reveals the racism that broke him"
+     "trailText": "Indigenous officers \u2018walk two worlds\u2019 and survive by being seen to fit in with police culture, Sgt Richard Monaei says"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -675,7 +675,7 @@
     "webUrl": "https://www.theguardian.com/commentisfree/2023/jan/04/right-millennials-vote-snowflakes-conservative",
     "apiUrl": "https://content.guardianapis.com/commentisfree/2023/jan/04/right-millennials-vote-snowflakes-conservative",
     "fields": {
-     "headline": "The right thrives on bullying \u2018snowflakes\u2019. But who will vote for it when they grow old? "
+     "trailText": "Young people may represent the first generation that doesn\u2019t grow more conservative with age, says Guardian columnist Owen Jones"
     },
     "isHosted": false,
     "pillarId": "pillar/opinion",
@@ -691,7 +691,7 @@
     "webUrl": "https://www.theguardian.com/uk-news/2023/jan/20/leicestershire-commissioner-settled-tribunal-claim-after-closing-own-ethics-committee",
     "apiUrl": "https://content.guardianapis.com/uk-news/2023/jan/20/leicestershire-commissioner-settled-tribunal-claim-after-closing-own-ethics-committee",
     "fields": {
-     "headline": "Leicestershire crime commissioner settled tribunal claim after closing own ethics committee"
+     "trailText": "Commissioner denies claim committee was closed because it raised concerns about Black Lives Matter comments"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
@@ -707,7 +707,7 @@
     "webUrl": "https://www.theguardian.com/culture/2022/aug/01/nichelle-nichols-obituary",
     "apiUrl": "https://content.guardianapis.com/culture/2022/aug/01/nichelle-nichols-obituary",
     "fields": {
-     "headline": "Nichelle Nichols obituary"
+     "trailText": "Actor who blazed a trail for black women on American TV in the 1960s in the role of Lt Uhura in Star Trek"
     },
     "isHosted": false,
     "pillarId": "pillar/arts",
@@ -723,7 +723,7 @@
     "webUrl": "https://www.theguardian.com/culture/2022/aug/01/nichelle-nichols-groundbreaking-figure-black-women",
     "apiUrl": "https://content.guardianapis.com/culture/2022/aug/01/nichelle-nichols-groundbreaking-figure-black-women",
     "fields": {
-     "headline": "Nichelle Nichols was my hero and a groundbreaking figure for Black women"
+     "trailText": "The death of the Star Trek actor leaves behind a hugely important legacy both on the small screen and in space"
     },
     "isHosted": false,
     "pillarId": "pillar/arts",
@@ -739,7 +739,7 @@
     "webUrl": "https://www.theguardian.com/music/2023/jan/11/kingsize-taylor-obituary",
     "apiUrl": "https://content.guardianapis.com/music/2023/jan/11/kingsize-taylor-obituary",
     "fields": {
-     "headline": "Kingsize Taylor obituary"
+     "trailText": "Singer and guitarist with the Dominoes, Merseybeat rivals to the Beatles in the early 1960s"
     },
     "isHosted": false,
     "pillarId": "pillar/arts",
@@ -755,7 +755,7 @@
     "webUrl": "https://www.theguardian.com/books/2022/nov/05/george-floyd-hunter-biden-lachlan-murdoch-fox-news-successor-book-paddy-manning",
     "apiUrl": "https://content.guardianapis.com/books/2022/nov/05/george-floyd-hunter-biden-lachlan-murdoch-fox-news-successor-book-paddy-manning",
     "fields": {
-     "headline": "From George Floyd to Hunter Biden: Lachlan Murdoch, Fox News and the year that tested America"
+     "trailText": "In an extract from his biography The Successor, <strong>Paddy Manning</strong> considers how Rupert Murdoch\u2019s favored son dealt with the challenges of 2020, and what might come next"
     },
     "isHosted": false,
     "pillarId": "pillar/arts",
@@ -771,27 +771,11 @@
     "webUrl": "https://www.theguardian.com/us-news/2023/jan/29/tyre-nichols-death-protests-memphis",
     "apiUrl": "https://content.guardianapis.com/us-news/2023/jan/29/tyre-nichols-death-protests-memphis",
     "fields": {
-     "headline": "\u2018We\u2019re not done\u2019: end of Scorpion unit after Tyre Nichols death is first step, protesters say"
+     "trailText": "Call for release of information on all officers and an end to pretextual traffic stops, such as pulling people over for loud music"
     },
     "isHosted": false,
     "pillarId": "pillar/news",
     "pillarName": "News"
-   },
-   {
-    "id": "books/2022/may/22/his-name-is-george-floyd-by-robert-samuels-and-toluse-olorunnipa-review-the-that-shamed-the-us",
-    "type": "article",
-    "sectionId": "books",
-    "sectionName": "Books",
-    "webPublicationDate": "2022-05-22T10:00:46Z",
-    "webTitle": "His Name is George Floyd by Robert Samuels and Toluse Olorunnipa review \u2013 the murder that shamed the US",
-    "webUrl": "https://www.theguardian.com/books/2022/may/22/his-name-is-george-floyd-by-robert-samuels-and-toluse-olorunnipa-review-the-that-shamed-the-us",
-    "apiUrl": "https://content.guardianapis.com/books/2022/may/22/his-name-is-george-floyd-by-robert-samuels-and-toluse-olorunnipa-review-the-that-shamed-the-us",
-    "fields": {
-     "headline": "His Name is George Floyd by Robert Samuels and Toluse Olorunnipa review \u2013 the murder that shamed the US"
-    },
-    "isHosted": false,
-    "pillarId": "pillar/arts",
-    "pillarName": "Arts"
    },
    {
     "id": "tv-and-radio/2022/may/31/police-on-trial-george-floyd-frontline-documentary",
@@ -803,7 +787,23 @@
     "webUrl": "https://www.theguardian.com/tv-and-radio/2022/may/31/police-on-trial-george-floyd-frontline-documentary",
     "apiUrl": "https://content.guardianapis.com/tv-and-radio/2022/may/31/police-on-trial-george-floyd-frontline-documentary",
     "fields": {
-     "headline": "Police on Trial: two years after the killing of George Floyd, what has changed?"
+     "trailText": "The Minneapolis murder led to protests and calls for structural change but a new documentary shows that the journey to racial equality remains long"
+    },
+    "isHosted": false,
+    "pillarId": "pillar/arts",
+    "pillarName": "Arts"
+   },
+   {
+    "id": "books/2022/may/22/his-name-is-george-floyd-by-robert-samuels-and-toluse-olorunnipa-review-the-that-shamed-the-us",
+    "type": "article",
+    "sectionId": "books",
+    "sectionName": "Books",
+    "webPublicationDate": "2022-05-22T10:00:46Z",
+    "webTitle": "His Name is George Floyd by Robert Samuels and Toluse Olorunnipa review \u2013 the murder that shamed the US",
+    "webUrl": "https://www.theguardian.com/books/2022/may/22/his-name-is-george-floyd-by-robert-samuels-and-toluse-olorunnipa-review-the-that-shamed-the-us",
+    "apiUrl": "https://content.guardianapis.com/books/2022/may/22/his-name-is-george-floyd-by-robert-samuels-and-toluse-olorunnipa-review-the-that-shamed-the-us",
+    "fields": {
+     "trailText": "A welcome humanising of Floyd might have benefited from a wider focus, including Black women\u2019s experiences of racism and a global perspective"
     },
     "isHosted": false,
     "pillarId": "pillar/arts",

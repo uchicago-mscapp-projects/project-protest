@@ -7,7 +7,7 @@ import urllib.parse
 
 ##Author: JP Martinez
 ##Task: Create querys and do requests for The Guardian API - Save JSON Files
-##Last date updated: 02.26.23
+##Last date updated: 02.27.23
 
 def create_query_statement(key,list_parameters, inclusive = True):
     """
@@ -76,7 +76,7 @@ def request_the_guardian(api_key, search = True, query_list = base_query_list, t
     parameters_list.append(to_date_param)
     page_size_param = "page-size=" + str(page_size)
     parameters_list.append(page_size_param)
-    show_field_param = "show-fields=headline"
+    show_field_param = "show-fields=trailText"
     parameters_list.append(show_field_param)
 
     #Join sections and request query
@@ -107,7 +107,7 @@ def get_json_files(api_key, search = True, query_list = base_query_list, tags_li
         response = request_the_guardian(api_key, search, query_list,tags_list,
     from_date,to_date,page_size,page)
         response_json = json.loads(response.text)
-        print("saved page n°{}".format(page))
+        print("saved page n° {}/{}".format(page,n_pages))
         
         with open("{}/the_guardian_{}.json".format("json_files",page),"w") as f:
             json.dump(response_json,f,indent=1)
