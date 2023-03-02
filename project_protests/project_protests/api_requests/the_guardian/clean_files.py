@@ -8,7 +8,6 @@ import os
 from bs4 import BeautifulSoup
 import re
 #from .make_request import base_query_list
-
 #from .. import sentiment_analysis
 
 base_query_list = ["Black Lives Matter", "BLM", "Police Brutality", \
@@ -29,13 +28,12 @@ def open_clean_data(json_file,query_list = base_query_list):
     "pillarName":"category", "webTitle" : "headline"}, inplace = True)
     
     df["id"] = df["id"].apply(lambda x: x.split("/")[-1])
-    df["body"] = df["fields"].apply(pd.Series)
+    df["body"] = df["fields"].apply(lambda x: dict(x)["body"])
+    df["standfirst"] = df["fields"].apply(lambda x: dict(x)["standfirst"])
 
     ###Retrieve first paragraph and remove tags and hrefs
     df["lead_paragraph"] = df["body"].apply(lambda x: BeautifulSoup(x,"html.parser").p)
-    df["lead_paragraph"] = df["lead_paragraph"].astype(str)
-    df["lead_paragraph"] = df["lead_paragraph"].apply(lambda x: re.sub(r"</?\w>?","",x))
-    df["lead_paragraph"] = df["lead_paragraph"].apply(lambda x: re.sub(r"href=\S*?>","",x))
+    df = retrieve_text_html(df,["lead_paragraph","standfirst"])
 
     df["date"] = df["date"].astype(str)
     df["date"] = df["date"].str.extract(r"(\d{4}-\d{2}-\d{2})")
@@ -58,8 +56,8 @@ def standarized_clean(df,varlist):
     var_list it removes leading and trailing whitespace and lower case
     
     Input:
-    df (Dataframe): Dataframed to which the cleaning is going to be applied
-    varlist: List of columns to be cleaned
+    -df (Dataframe): Dataframed to which the cleaning is going to be applied
+    -varlist: List of columns to be cleaned
 
     Return:
         Dataframed with cleaned specified columns 
@@ -68,6 +66,22 @@ def standarized_clean(df,varlist):
         df[var] = df[var].astype(str)
         df[var] = df[var].str.lower()
         df[var] = df[var].str.strip()
+
+    return df
+
+def retrieve_text_html(df, varlist):
+    """
+    Retrieves the text from an html text by removing tags and hrefs
+    Inputs:
+    -df (Dataframe): Dataframed to which the cleaning is going to be applied
+    -varlist: List of columns to be cleaned
+    Return:
+        Dataframed with cleaned specified columns 
+    """
+    for var in varlist:
+        df[var] = df[var].astype(str)
+        df[var] = df[var].apply(lambda x: re.sub(r"</?\w>?","",x))
+        df[var] = df[var].apply(lambda x: re.sub(r"href=\S*?>","",x))
 
     return df
 
