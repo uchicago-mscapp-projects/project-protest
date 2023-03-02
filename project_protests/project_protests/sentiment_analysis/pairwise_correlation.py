@@ -21,9 +21,11 @@ def word_similarity(term):
     for year in years:
         articles_text = df.loc[df['year']==year]['lead_paragraph'].str.cat(sep=' ')
         text = clean(articles_text)
+        if year == 2019: 
+            print(text)
         # mode = statistics.mode(text[0])
-        word2vec = Word2Vec(text, min_count = 10)
-        similar_words = word2vec.wv.most_similar(positive=[term], topn=30)
+        word2vec = Word2Vec(text, min_count = 10, sg=1, window=7)
+        similar_words = word2vec.wv.most_similar(positive=[term], topn=10)
         visualize_simiilarity(similar_words, year)
     return None
 
@@ -37,14 +39,14 @@ def clean(text):
     words = [nltk.word_tokenize(sent) for sent in sentences]
     # removes stop words
     for i in range(len(words)):
-        words[i] = [w for w in words[i] if w not in stopwords.words('english')]
+        words[i] = [w for w in words[i] if w not in stopwords.words('english') and len(w) > 2]
     return  words
 
 def visualize_simiilarity(similar_words, year):
     title = str(year)
     df = pd.DataFrame(similar_words, columns=["word", "score"])
     hist = px.histogram(df, x="word", y="score",title=title)
-    hist.update_layout(yaxis_range=[0.0, 1.0])
+    hist.update_layout(yaxis_range=[0.9, 1.0])
     # hist.update_layout(title_x: year)
     hist.show()
     return None
