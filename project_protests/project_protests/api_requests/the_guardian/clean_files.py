@@ -1,12 +1,14 @@
+##Author: JP Martinez
+##Task: Clean The Guardian json files
+##Last update: 03.1.23
+
 import json
 import pandas as pd
 import os 
+from bs4 import BeautifulSoup
 import re
-#from .. import sentiment_analysis
 
-##Author: JP Martinez
-##Task: Clean The Guardian json files
-##Last update: 02.26.23
+#from .. import sentiment_analysis
 
 def open_clean_data(json_file):
     """
@@ -21,9 +23,20 @@ def open_clean_data(json_file):
 
     df.rename(columns = {"webPublicationDate":"date","webUrl": "url", "sectionId":"section",
     "pillarName":"category", "webTitle" : "headline"}, inplace = True)
-    df = df.drop(columns = ["sectionName","isHosted", "pillarId"])
+    
+    df = df[df["section"] == "us-news"]
+    df["id"] = df["id"].apply(lambda x: x.split("/")[-1])
+    df["body"] = df["fields"].apply(pd.Series)
+    #df["body"] = df["body"].astype(str)
 
-    df["lead"] = df["fields"].apply(pd.Series) ##Change to trailText
+    ###Retrieve first paragraph and remove tags and hrefs
+    #df["lead_paragraph"] = df["body"].apply(lambda x: re.search(r"<p>.*?</p>",x).group(0) if re.search(r"<p>.*?</p>",x) != None else "None")
+    df["lead_paragraph"] = df["body"].apply(lambda x: BeautifulSoup(x,"html.parser").p)
+    df["lead_paragraph"] = df["lead_paragraph"].astype(str)
+    df["lead_paragraph"] = df["lead_paragraph"].apply(lambda x: re.sub(r"</?\w>?","",x))
+    df["lead_paragraph"] = df["lead_paragraph"].apply(lambda x: re.sub(r"href=\S*?>","",x))
+
+    df = df.drop(columns = ["sectionName","isHosted", "pillarId","body","fields","apiUrl"])
 
     df["date"] = df["date"].astype(str)
     df["date"] = df["date"].str.extract(r"(\d{4}-\d{2}-\d{2})")
@@ -68,4 +81,4 @@ def create_news_df():
         df = pd.concat([df,open_clean_data("{}/the_guardian_{}.json".format(json_directory,i))]
         ,ignore_index = True)
 
-    df.to_csv("data/the_guardian_compiled", index = False)
+    df.to_csv("data/the_guardian_compiled.csv", index = False)
