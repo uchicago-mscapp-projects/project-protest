@@ -74,7 +74,7 @@ def request_the_guardian(api_key, search = True, query_list = base_query_list, t
     parameters_list.append(to_date_param)
     page_size_param = "page-size=" + str(page_size)
     parameters_list.append(page_size_param)
-    show_field_param = "show-fields=body"
+    show_field_param = "show-fields=body,standfirst"
     parameters_list.append(show_field_param)
     current_page_param = "page=" + str(page)
     parameters_list.append(current_page_param)
