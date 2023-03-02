@@ -7,42 +7,48 @@ import pandas as pd
 import os 
 from bs4 import BeautifulSoup
 import re
+#from .make_request import base_query_list
 
 #from .. import sentiment_analysis
 
-def open_clean_data(json_file):
+base_query_list = ["Black Lives Matter", "BLM", "Police Brutality", \
+"George Floyd", "Breonna Taylor", "Tyrel Nichols", "Ahmaud Abery", "Blue Lives Matter"]
+
+def open_clean_data(json_file,query_list = base_query_list):
     """
     Open json_files created in py file "make_requests" and clean them
     Input 
     """
-    #Open Json-files into dictionary
+    ##Open Json-files into dictionary
     df = pd.read_json(json_file)
     df = df.from_dict(df.loc["results", "response"])
     
-    #Structure df and clean_data
+    ##Structure df and clean_data
 
     df.rename(columns = {"webPublicationDate":"date","webUrl": "url", "sectionId":"section",
     "pillarName":"category", "webTitle" : "headline"}, inplace = True)
     
-    df = df[df["section"] == "us-news"]
     df["id"] = df["id"].apply(lambda x: x.split("/")[-1])
     df["body"] = df["fields"].apply(pd.Series)
-    #df["body"] = df["body"].astype(str)
 
     ###Retrieve first paragraph and remove tags and hrefs
-    #df["lead_paragraph"] = df["body"].apply(lambda x: re.search(r"<p>.*?</p>",x).group(0) if re.search(r"<p>.*?</p>",x) != None else "None")
     df["lead_paragraph"] = df["body"].apply(lambda x: BeautifulSoup(x,"html.parser").p)
     df["lead_paragraph"] = df["lead_paragraph"].astype(str)
     df["lead_paragraph"] = df["lead_paragraph"].apply(lambda x: re.sub(r"</?\w>?","",x))
     df["lead_paragraph"] = df["lead_paragraph"].apply(lambda x: re.sub(r"href=\S*?>","",x))
 
-    df = df.drop(columns = ["sectionName","isHosted", "pillarId","body","fields","apiUrl"])
-
     df["date"] = df["date"].astype(str)
     df["date"] = df["date"].str.extract(r"(\d{4}-\d{2}-\d{2})")
     df["date"] = pd.to_datetime(df["date"],format= "%Y/%m/%d")
+    
+    ##Add dummy variables to identify which tags match
+    for query_term in query_list:
+        df[query_term] = df["headline"].apply(lambda x: query_term in x)
 
-    df = standarized_clean(df,["section", "headline"])
+    #Drop unnecesary columns
+    df = df.drop(columns = ["sectionName","isHosted", "pillarId","body","fields","apiUrl"])
+
+    df = standarized_clean(df,["section", "headline","lead_paragraph"])
 
     return df
 
