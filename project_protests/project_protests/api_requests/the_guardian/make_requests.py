@@ -2,21 +2,19 @@ import sys
 import json
 import lxml.html
 import requests
-#from urllib.parse import urllibparse
 import urllib.parse
 
 ##Author: JP Martinez
 ##Task: Create querys and do requests for The Guardian API - Save JSON Files
-##Last date updated: 02.27.23
+##Last date updated: 03.02.23
 
-def create_query_statement(key,list_parameters, inclusive = True):
+def create_query_statement(key,list_parameters):
     """
     Creates a query statement to add to the request
     Input:
-    key (str):
-    query_list (list): List of parameters to add to the query
-    inclusive (Bool): True if the query parameter should include any of the terms in
-    query list. If false, article must have all parameters in query_search
+    key (str): api-key
+    list_parameters (list): List of parameters to add to the query
+    Return: (str: encoded query statement to pass to the )
     """
     query_terms_encoded_list = []
     
@@ -29,7 +27,7 @@ def create_query_statement(key,list_parameters, inclusive = True):
     return query
 
 base_query_list = ["Black Lives Matter", "BLM", "Police Brutality", \
-"George Floyd", "Breonna Taylor", "Tyrel Nichols", "Ahmaud Abery"]  
+"George Floyd", "Breonna Taylor", "Tyrel Nichols", "Ahmaud Abery", "Blue Lives Matter"]
 
 
 def request_the_guardian(api_key, search = True, query_list = base_query_list, tags_list = None,
@@ -80,7 +78,7 @@ def request_the_guardian(api_key, search = True, query_list = base_query_list, t
     parameters_list.append(show_field_param)
     current_page_param = "page=" + str(page)
     parameters_list.append(current_page_param)
-    query_fields_param = "query-fields=headline"
+    query_fields_param = "query-fields=headline,standfirst"
     parameters_list.append(query_fields_param)
 
     #Join sections and request query
@@ -93,6 +91,16 @@ def get_json_files(api_key, search = True, query_list = base_query_list, tags_li
  from_date = "2017-01-01", to_date = "2023-01-31", page_size = 50, page = 1):
     """
     Get json files
+    Inputs:
+    -api_key (str): Api key to be used for the request
+    -search (Bool): If True, use search
+    -query_list (list): List of items to search in content
+    -tags_list(list): Tags to look for in content
+    -from_date(str): Starting date for news retrieve 
+    -to_date(str): End date for news retrieve
+    - page (int): The page to retrieve in the results 
+    Return:
+     None - it creates json-files for each of the pages in the request results
     """
     #Make request and do json transformations
     response = request_the_guardian(api_key,search, query_list, tags_list,
