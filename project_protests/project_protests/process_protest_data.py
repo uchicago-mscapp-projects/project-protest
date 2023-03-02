@@ -87,9 +87,7 @@ def process_data():
         return df['Date'].groupby([df.Date.dt.year, df.Date.dt.month]).agg('count')
     
     def group_by_locality(df):
+        return df['locality'].groupby([df.Date.dt.year, df.Date.dt.month]).agg('count')
 
-        return None
-    
     def analyze_protest_type(df):
-
-        return None
+        return df['locality'].groupby([df.Date.dt.year, df.Date.dt.month]).agg('count')

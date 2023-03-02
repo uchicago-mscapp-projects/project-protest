@@ -1,6 +1,146 @@
 import time
 import requests
 import json
+import os
+import calendar
+
+
+def create_json(tags, begin_date = "20170101", end_date = "20230131"):
+    """
+    Create all json files from articles that meet query search parameters
+
+    Inputs:
+        tags (lst): list of tags to look for. The tags to filter for are looked
+            in the body, headline and byline of the articles.
+        begin_date (str): 8 digits (YYYYMMDD) string that specify the begin date
+            or from when to start looking for articles.
+        end_date (str): 8 digits (YYYYMMDD) string that specify the end date or
+            until when to stop looking for articles.
+    """
+
+    begin_year = int(begin_date[:4])
+    end_year = int(end_date[:4])
+    # Get parent directory of current file
+    current_dir = os.getcwd()
+    
+    # We create JSONs for each year because the NYT API has a page limit of 200
+    # pages per query search
+    for year in range(begin_year, end_year):
+        # First we create a raw_data and year folders in case they don't exist
+        for month in range(1, 13):
+            year_str = str(year)
+            month_dir = calendar.month_name[month]
+            new_dir = os.path.join(current_dir, "raw_data", year_str, month_dir)
+            if os.path.exists(new_dir) == False:
+                os.makedirs(new_dir)
+            
+            # We convert the month to a string with "mm" format
+            month_str = str(month) 
+            if len(month_str) == 1:
+                month_str = "0" + month_str
+            
+            _, day = calendar.monthrange(year, month)
+            
+            begin_new = year_str + month_str + "01"
+            end_new = year_str + month_str + str(day)
+            
+            create_json_h(tags, begin_new, end_new)
+
+    # CREATE FUNCTION THAT DOES ALL THIS PROCESS
+
+    # Create jsons for final year
+    year = end_year
+    end_month = int(end_date[4:6])
+    for month in range(1, end_month + 1):
+        year_str = str(year)
+        month_dir = calendar.month_name[month]
+        new_dir = os.path.join(current_dir, "raw_data", year_str, month_dir)
+        if os.path.exists(new_dir) == False:
+            os.makedirs(new_dir)
+            
+        # We convert the month to a string with "mm" format
+        month_str = str(month) 
+        if len(month_str) == 1:
+            month_str = "0" + month_str
+            
+        _, day = calendar.monthrange(year, month)
+    
+        begin_new = year_str + month_str + "01"
+        end_new = year_str + month_str + str(day)
+        
+        create_json_h(tags, begin_new, end_new)
+
+
+def create_json_h(tags, begin_date, end_date):
+    """
+    Create json files from articles that meet query search parameters for a
+    specific year because of API restrictions with numbers of pages
+
+    Inputs:
+        tags (lst): list of tags to look for. The tags to filter for are looked
+            in the body, headline and byline of the articles.
+        begin_date (str): 8 digits (YYYYMMDD) string that specify the begin date
+            or from when to start looking for articles.
+        end_date (str): 8 digits (YYYYMMDD) string that specify the end date or
+            until when to stop looking for articles.
+    """
+    year = begin_date[:4]
+    month_name = calendar.month_name[int(begin_date[4:6])]
+    
+    resp = make_request(tags, begin_date, end_date)
+    
+    # Convert response to json format
+    resp_json = json.loads(resp.text)
+
+    # Save first json
+    file_name = os.path.join("raw_data", year, month_name, "nyt_0.json")
+    
+    with open(file_name, "w") as f:
+        json.dump(resp_json, f, indent=1)
+        f.close()
+
+    # Get number of articles that match our query search parameters
+    hits = resp_json["response"]["meta"]["hits"]
+
+    # Get maximum number of pages we can query
+    max_pages = int(hits / 10)
+
+    # Query everything and save the jsons
+    for page_n in range(1, max_pages + 1):
+        page_str = str(page_n)
+        resp = make_request(tags, begin_date, end_date, page_str)
+        resp_json = json.loads(resp.text)
+        name = "nyt_" + page_str + ".json"
+        file_name = os.path.join("raw_data", year, month_name, name)
+        
+        with open(file_name, "w") as f:
+            json.dump(resp_json, f, indent=1)
+            f.close()
+
+def make_request(tags, begin_date, end_date, page = "0"):
+    """
+    Make a GET request to the NYT Article Search API with a request delay of 6
+        seconds to avoid reaching request limit of 60 requests per minute.
+
+    Inputs:
+        tags (lst): list of tags (strings) to look for. The tags to filter for
+            are looked in the body, headline and byline of the articles.
+        begin_date (str): 8 digits (YYYYMMDD) string that specify the begin date
+            or from when to start looking for articles.
+        end_date (str): 8 digits (YYYYMMDD) string that specify the end date or
+            until when to stop looking for articles.
+        page (str): number of page string that states where to look for articles.
+    
+    Return (Response): API request response with specified query parameters
+    """
+
+    url = create_url(tags, begin_date, end_date, page)
+    
+    time.sleep(6)
+    
+    resp = requests.get(url)
+
+    return resp
 
 
 def create_url(tags, begin_date, end_date, page):
@@ -41,70 +181,3 @@ def create_url(tags, begin_date, end_date, page):
             "&page=" + page + "&api-key=" + api_key
 
     return url
-
-
-def make_request(tags, begin_date, end_date, page = "0"):
-    """
-    Make a GET request to the NYT Article Search API with a request delay of 6
-        seconds to avoid reaching request limit of 60 requests per minute.
-
-    Inputs:
-        tags (lst): list of tags to look for. The tags to filter for are looked
-            in the body, headline and byline of the articles.
-        begin_date (str): 8 digits (YYYYMMDD) string that specify the begin date
-            or from when to start looking for articles.
-        end_date (str): 8 digits (YYYYMMDD) string that specify the end date or
-            until when to stop looking for articles.
-        page (str): number of page string that states where to look for articles.
-    
-    Return (Response): API request response with specified query parameters
-    """
-
-    url = create_url(tags, begin_date, end_date, page)
-    
-    time.sleep(6)
-    
-    resp = requests.get(url)
-
-    return resp
-
-def get_json(tags, begin_date = "20180101", end_date = "20230201"):
-    """
-    Create json files from articles that meet query search parameters
-
-    Inputs:
-        tags (lst): list of tags to look for. The tags to filter for are looked
-            in the body, headline and byline of the articles.
-        begin_date (str): 8 digits (YYYYMMDD) string that specify the begin date
-            or from when to start looking for articles.
-        end_date (str): 8 digits (YYYYMMDD) string that specify the end date or
-            until when to stop looking for articles.
-    """
-
-    resp = make_request(tags, begin_date, end_date)
-    
-    # Convert response to json format
-    resp_json = json.loads(resp.text)
-
-    # Save first json
-    with open("nyt_0.json", "w") as f:
-        json.dump(resp_json, f, indent=1)
-        f.close()
-
-    # Get number of articles that match our query search parameters
-    hits = resp_json["response"]["meta"]["hits"]
-
-    # Get maximum number of pages we can query
-    max_pages = int(hits / 10)
-
-    # Query everything and save the jsons
-    for page_n in range(1, max_pages + 1):
-        page_str = str(page_n)
-        resp = make_request(tags, begin_date, end_date, page_str)
-        resp_json = json.loads(resp.text)
-        file_name = "nyt_" + page_str + ".json"
-        
-        with open(file_name, "w") as f:
-            json.dump(resp_json, f, indent=1)
-            f.close()
-
