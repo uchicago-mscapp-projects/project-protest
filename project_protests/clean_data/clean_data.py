@@ -1,30 +1,28 @@
 import pandas as pd
 import json
 import os
+from collecting_news import create_dirs
 
-# def import_json(filename):
-#     """
-#     Import json file from path
 
-#     Inputs:
-#         filename (str): file path
-    
-#     Return (dict): json object
-#     """
-    
-#     file = open(filename)
-#     data = json.load(file)
-
-#     return data
-
-def create_csv():
+def create_csv(tags, filters, begin_date = "20170101", end_date = "20230131"):
     """
     Create csv file with news articles related to BLM protests
 
+    Inputs:
+        tags (lst): list of tags to look for. The tags to filter for are looked
+            in the body, headline and byline of the articles.
+        filters (lst): list of filters where to look tags. They can be "headline"
+            and/or "body"
+        begin_date (str): 8 digits (YYYYMMDD) string that specify the begin date
+            or from when to start looking for articles.
+        end_date (str): 8 digits (YYYYMMDD) string that specify the end date or
+            until when to stop looking for articles.
     """
-    d = {"id": [], "date": [], "url": [], "headline": [], "abstract": [], "lead_paragraph": [], "type_of_material": []}
-    # d = {"id": [], "date": [], "url": [], "headline": [], "abstract": [], "lead_paragraph": []}
-
+    ### ADD CREATE DIRS FUNCTION SO THIS FUNCTION DETONATES ALL THE PROCESS
+    create_dirs(tags, filters, begin_date, end_date)
+    
+    d = {"id": [], "date": [], "url": [], "headline": [], "abstract": [],
+        "lead_paragraph": [], "type_of_material": [], "section_name": []}
 
     # CHANGE PATH later to make dynamic path depending of parent
     parent_dir = os.path.join(os.getcwd(), "raw_data")
@@ -51,11 +49,42 @@ def create_csv():
                 data = json.load(f)
                 update_dict(d, data)
 
-    #return d
+    ## CHECK IF I RETURN JUST THE DATAFRAME OBJECT
+    ## CHECK IF SPLITTING THIS IN ANOTHER CREATE_DATAFGRAME FUNCTION
 
-    df = pd.DataFrame(data=d)
+    df = create_df(d, tags, filters)
+     
     df.to_csv("raw_data/nyt_articles.csv", index=False)
 
+def create_df(d, tags, filters):
+    """
+    Create dataframe based on articles' dictionary
+
+    Inputs:
+        d (dict):  dictionary with keys and values to create dataframe
+        tags (lst): list of tags to look for. The tags to filter for are looked
+            in the body, headline and byline of the articles.
+        filters (lst): list of filters where to look tags. They can be "headline"
+            and/or "body"
+
+    Return (DataFrame): dataframe with NYT articles data
+    """
+    df = pd.DataFrame(data=d)
+
+    df = df.astype('string')
+    df["date"] = df["date"].astype('datetime64')
+
+    for tag in tags:
+        df[tag] = False
+        for fil in filters:
+            for index, row in df.iterrows():
+                #print(index, fil)
+                if pd.isna(row[fil]):
+                    continue
+                if tag.lower() in row[fil].lower():
+                    df[tag][index] = True
+
+    return df
 
 def update_dict(d, json):
     """
@@ -67,8 +96,6 @@ def update_dict(d, json):
 
     Return (dict): dictionary with added values for each key
     """
-    
-    #print(json)
 
     for article in json["response"]["docs"]:
         d["id"].append(article["_id"][14:])
@@ -80,7 +107,5 @@ def update_dict(d, json):
         # Add get method to set to default value in case "type_of_material" is
         # not a key in the json dictionary
         d["type_of_material"].append(article.get("type_of_material", "NaN"))
-
-    
-
+        d["section_name"].append(article.get("section_name", "NaN"))
 
