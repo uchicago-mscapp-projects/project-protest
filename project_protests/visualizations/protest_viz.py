@@ -3,10 +3,12 @@ import plotly.express as px
 
 def protest_data():
     # change to the create path using parent wd so it's not specific to me 
-    df = pd.DataFrame(pd.read_csv("/home/lisettesolis/30122-project-project-protest/project_protests/visualizations/test_police-data.csv",on_bad_lines='skip'), columns = ['Location', 'Date', 'County', 'StateTerritory', \
-        'City_Town'])
-    df['Year'] = df['Date'].str.split('/', 2).str[2]
-
+    df = pd.DataFrame(pd.read_csv("/home/lisettesolis/30122-project-project-protest/project_protests/count_data/police-data.csv",on_bad_lines='skip'),\
+        columns = ['Location', 'Date', 'County', 'StateTerritory','City_Town'])
+    df['Date']= pd.to_datetime(df['Date'])
+    df['Month'] = df['Date'].dt.month
+    df['Year'] = df['Date'].dt.year 
+    
     return df
 
 def city_counts():
