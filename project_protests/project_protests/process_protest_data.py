@@ -81,13 +81,3 @@ def process_data():
     police_df = df[df['Claim Description'].str.contains('|'.join(police_terms))]
     police_df.to_csv("count_data/police-data.csv")
     return police_df
-
-    # Analysis 
-    def group_by_date(df):
-        return df['Date'].groupby([df.Date.dt.year, df.Date.dt.month]).agg('count')
-    
-    def group_by_locality(df):
-        return df['locality'].groupby([df.Date.dt.year, df.Date.dt.month]).agg('count')
-
-    def analyze_protest_type(df):
-        return df['locality'].groupby([df.Date.dt.year, df.Date.dt.month]).agg('count')
