@@ -2,7 +2,7 @@
 name = "project-protests"
 version = "0.1.0"
 description = ""
-authors = ["Josemaria Macedo - JP Martinez - Monica Nimaggada - Lisette Solis"]
+authors = ["Josemaria Macedo - JP Martinez - Monica Nimmagadda - Lisette Solis"]
 readme = "README.md"
 packages = [{include = "project_protests"}]
 
