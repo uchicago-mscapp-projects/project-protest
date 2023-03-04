@@ -1,0 +1,11 @@
+h1 {text-align:"center";
+    background-color : rgb(255, 251, 250);
+font: Arial; border-style: "solid"} 
+p {text-align:"left"; background-color : rgb(255, 251, 250); 
+    font:120% Arial;
+margin-left:"5cm"; margin-right:"5cm"}
+h2 {text-align:"left"; background-color : rgb(255, 251, 250);
+    font :Arial ; margin-left :"5cm"; margin-right:"5cm"}
+body{
+    background-color : rgb(255, 251, 250)
+}  
