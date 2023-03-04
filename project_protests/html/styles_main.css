@@ -1,0 +1,35 @@
+h1, h2{
+    color: rgba(0, 0, 0, 0.769);
+  }
+  /*li.albums {list-style-type: "-";
+      text-align: center
+  }*/ 
+  
+  html{
+    width: auto;
+  }
+  
+  li{
+      font: 100% sans-serif;
+    }
+  
+  p{
+      font: 100% sans-serif;
+      text-indent: 50px;
+      width: 700px;
+      text-align: justify;
+      margin: 25px 50px 30px;
+  }
+  
+  h1 {
+      font: 160% sans-serif;
+      border-style: solid;
+      /*background-color: rgb(224, 180, 213);*/
+    }
+  
+  h2 {
+      font: 140% sans-serif;
+    }
+  
+  body {background-color: rgb(249, 246, 238);
+  }
