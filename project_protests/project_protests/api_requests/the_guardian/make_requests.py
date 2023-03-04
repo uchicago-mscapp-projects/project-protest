@@ -27,7 +27,7 @@ def create_query_statement(key,list_parameters):
     return query
 
 base_query_list = ["Black Lives Matter", "BLM", "Police Brutality", \
-"George Floyd", "Breonna Taylor", "Tyrel Nichols", "Ahmaud Abery", "Blue Lives Matter"]
+"George Floyd", "Breonna Taylor", "Tyrel Nichols", "Ahmaud Arbery", "Blue Lives Matter"]
 
 
 def request_the_guardian(api_key, search = True, query_list = base_query_list, tags_list = None,

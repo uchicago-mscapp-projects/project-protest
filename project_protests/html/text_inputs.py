@@ -2,12 +2,13 @@
 ###While this is hardcoded and adapted according to the final text requirements,
 ###Allows for easier modification of the dashboard app and allows less conflict
 
+#Description of dictionary keys
 #Title: h1 tags related text
 #subtitles: h2 tags related text
 #subsubtitles: h3 tags related text  
 #paragrahps: p tags related text
 
-HTML_TEXT ={ 
+HTML_TEXT = { 
     "Title" : """Project Protest: Analysis of the Black Lives Matter Movement after the
     George Floyd Murder""", 
     "subtitles": {"Number of protest":"Analysis of number of protests",
