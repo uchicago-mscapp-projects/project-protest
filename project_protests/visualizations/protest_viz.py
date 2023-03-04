@@ -5,6 +5,8 @@ import dash
 import os
 
 def protest_data():
+    """
+    """
     # change to the create path using parent wd so it's not specific to me 
     df = pd.DataFrame(pd.read_csv("/home/lisettesolis/30122-project-project-protest/project_protests/count_data/police-data.csv",on_bad_lines='skip'),\
         columns = ['Location', 'Date', 'County', 'StateTerritory','City_Town'])
@@ -16,6 +18,8 @@ def protest_data():
 
 
 def count_all():
+    """
+    """
     df = protest_data()
     df_pivot = df.groupby(['Year']).size().to_frame().reset_index()
     # df_pivot.rename({'0':'Count'}, axis='columns', inplace=True)
@@ -31,6 +35,8 @@ def count_all():
 
 
 def go_cities():
+    """"
+    """
     df = protest_data()
     dfg = df.groupby(['Year', 'City_Town']).size().to_frame().sort_values([0], ascending = False).head(10).reset_index()
     cities = list(dfg['City_Town'].unique())
