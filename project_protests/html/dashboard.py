@@ -4,9 +4,9 @@
 
 import dash
 import pandas as pd
-#import dash_bootstrap_components as dbc
-import dash_core_components as dcc
-import dash_html_components as html
+import dash_bootstrap_components as dbc
+from dash import dcc as dcc
+from dash import html as html
 import plotly.express as px
 import plotly.graph_objects as go
 from dash.dependencies import Input, Output
@@ -14,13 +14,7 @@ from text_inputs import HTML_TEXT
 
 app =dash.Dash(__name__,assets_folder="assets")
 
-background_color = "background-color : rgb(255, 245, 238)"
-style_h1 = {"text-align":"center","background-color" : "rgb(255, 245, 238)",
-"font":"Arial", "border-style": "solid"} 
-style_p = {"text-align":"left","background-color" : "rgb(255, 245, 238)","font":r"120% Arial",
-"margin-left":"5cm","margin-right":"5cm"}
-style_h2 = {"text-align":"left","background-color" : "rgb(255, 245, 238)","font":r"Arial",
-"margin-left":"5cm","margin-right":"5cm"}  
+# df = pd.read_csv("Test_data.csv")
 
 
 app.layout = html.Div(style={'backgroundColor': "rgb(255, 245, 238)"},
@@ -53,5 +47,18 @@ app.layout = html.Div(style={'backgroundColor': "rgb(255, 245, 238)"},
 
 ])
 
-#if __name__ == "__main__":
-app.run_server(debug = True)
+# @app.callback(
+#     [Output(component_id="Heatmap",component_property="figure")],
+#     [Input(component_id = "select_city",component_property = "value")]
+#  )
+
+if __name__ == "__main__":
+    app.run_server(debug = True)
+
+# def update_graph(city_selected):
+#     print(city_selected)
+#     dff = df.copy()
+#     if city_selected != "All cities":
+#         dff = dff[dff["City"] == city_selected]
+#     fig = px.line(dff, x = "Year", y = "Population")
+#     return [fig]
