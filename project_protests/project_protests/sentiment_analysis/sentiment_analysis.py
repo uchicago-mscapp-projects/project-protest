@@ -5,7 +5,10 @@
 import pandas as pandas
 import os
 import nltk
-import numpy as np
+import pandas as pd
+import plotly.express as px
+from plotly.subplots import make_subplots
+import pathlib
 nltk.download([
 "vader_lexicon",
 ])
@@ -17,8 +20,10 @@ WORDS_TO_UPDATE = {
     "protest": 0, "brutality": 0
 }
 
+nyt_pathfile = pathlib.Path(__file__).parent.parent.parent / "clean_data/raw_data/nyt_articles.csv"
+the_guardian_pathfile = pathlib.Path(__file__).parent.parent / "api_requests/the_guardian/data/the_guardian_compiled.csv"
 
-def edit_sentiment_dictionary(update_dict = words_to_update):
+def edit_sentiment_dictionary(update_dict = WORDS_TO_UPDATE):
     """
     Edit sentiment dictionary to exclude certain words that are common and
     neutral in the context but that the nltk dictionary classifies as negative
@@ -51,4 +56,19 @@ def sentiment_scores(filename, columns_list):
     return df
 
     
-
+def visualize_sentiment_scores(column):
+    
+    df_nyt = sentiment_scores(nyt_pathfile,[column])
+    df_tg = sentiment_scores(the_guardian_pathfile, [column])
+    df = pd.concat([df_nyt,df_tg])
+    df["year"] = pd.DatetimeIndex(df['date']).year
+    df = df[df["year"] != 2023]
+    fig = make_subplots(rows=2,cols=3)
+    for idx, year in enumerate(df['year'].unique()):
+        chart = px.histogram(df[df['year']==year], x="{}_score".format(column), color='year')
+        chart.update_layout(title=str(year))
+        if idx < 3:
+            fig.append_trace(chart.data[0], row=1, col=idx+1)
+        else:
+            fig.append_trace(chart.data[0], row=2, col=(idx+1)-3)
+    fig.show()

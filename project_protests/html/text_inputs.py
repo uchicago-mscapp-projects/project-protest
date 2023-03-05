@@ -17,7 +17,7 @@ HTML_TEXT = {
     "News":"Analyzing changes in news coverage",
     "Sentiment_analysis":"Analyzing perception in news coverage",
     "Conclusion":"Conclusion"},
-    "sub_subtitles": {"coverage": "News coverage", "sentiment":"Sentiment Analysis",
+    "sub_subtitles": {"coverage": "News_coverage", "sentiment":"Sentiment Analysis",
     "pairwise": "Pairwise correlations"},
     "paragraphs": {
         "introduction": """
