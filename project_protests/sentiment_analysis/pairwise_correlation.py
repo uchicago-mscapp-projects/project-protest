@@ -6,7 +6,6 @@ import numpy as np
 from gensim.models import Word2Vec  
 import pathlib
 import pandas as pd
-from ..visualizations.pairwise_viz import visualize_simiilarity
 # Monica Nimmagadda # 
 
 def word_similarity(term):
@@ -27,7 +26,6 @@ def word_similarity(term):
     df['year'] = pd.DatetimeIndex(df['date']).year
     df_nyt['year'] = pd.DatetimeIndex(df_nyt['date']).year
     df = pd.concat([df, df_nyt])
-    print(df)
     years = sorted(df['year'].unique())
     visualization_df = []
     for year in years:
@@ -42,7 +40,6 @@ def word_similarity(term):
         similar_words = word2vec.wv.most_similar(positive=[term], topn=15)
         for word, score in similar_words:
             visualization_df.append((word, score, year))
-    visualize_simiilarity(visualization_df)
     return visualization_df
 
 def clean(text):

@@ -6,7 +6,7 @@ import urllib.parse
 
 ##Author: JP Martinez
 ##Task: Create querys and do requests for The Guardian API - Save JSON Files
-##Last date updated: 03.02.23
+##Last date updated: 03.05.23
 
 def create_query_statement(key,list_parameters):
     """

@@ -86,4 +86,4 @@ def go_cities():
     title="Cities with the most Protests", template="simple_white"
     )
 
-    return fig.show()
+    return fig
