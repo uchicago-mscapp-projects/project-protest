@@ -9,7 +9,13 @@
 HTML_TEXT ={ 
     "Title" : """Project Protest: Analysis of the Black Lives Matter Movement after the
     George Floyd Murder""", 
-    "subtitles": {"Number of protest":"Analysis of number of protests"},
+    "subtitles": {"Number of protest":"Analysis of number of protests",
+    "Police":"Analyzing changes in police budget",
+    "News":"Analyzing changes in news coverage",
+    "Sentiment_analysis":"Analyzing perception in news coverage",
+    "Conclusion":"Conclusion"},
+    "sub_subtitles": {"coverage": "News coverage", "sentiment":"Sentiment Analysis",
+    "pairwise": "Pairwise correlations"},
     "paragraphs": {
         "introduction": """
         On May 25, Minneapolis police officers arrested George Floyd, a 46-year-old black man,
