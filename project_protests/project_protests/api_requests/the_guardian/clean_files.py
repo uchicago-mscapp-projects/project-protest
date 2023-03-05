@@ -1,6 +1,6 @@
 ##Author: JP Martinez
 ##Task: Clean The Guardian json files
-##Last update: 03.04.23
+##Last update: 03.1.23
 
 import json
 import pandas as pd
