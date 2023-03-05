@@ -1,4 +1,5 @@
 ###Task: Add text used in dashboard appication
+###Last modified 03.04.23
 ###While this is hardcoded and adapted according to the final text requirements,
 ###Allows for easier modification of the dashboard app and allows less conflict
 
