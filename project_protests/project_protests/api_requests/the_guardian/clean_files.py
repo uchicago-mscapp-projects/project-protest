@@ -92,7 +92,8 @@ def create_news_df():
     Inputs:
     - none, it uses the json_files obtained from 
     """
-    json_directory = "json_files"
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    json_directory = os.path.join(current_dir, "json_files")
     df = open_clean_data("{}/the_guardian_1.json".format(json_directory))
 
     number_of_files = len(os.listdir(json_directory))
@@ -101,4 +102,4 @@ def create_news_df():
         df = pd.concat([df,open_clean_data("{}/the_guardian_{}.json".format(json_directory,i))]
         ,ignore_index = True)
 
-    df.to_csv("data/the_guardian_compiled.csv", index = False)
+    df.to_csv(os.path.join(current_dir, "data/the_guardian_compiled.csv"), index = False)

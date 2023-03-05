@@ -4,9 +4,16 @@ import json
 import os
 import calendar
 import shutil
+from ..query_params import query_lst, from_date, to_date, filters_lst
+from ..config import nyt_api_key
+
+# Clean dates from query_params file
+begin_date = from_date.replace("-", "")
+end_date = to_date.replace("-", "")
 
 
-def create_dirs(tags, filters, begin_date, end_date):
+def create_dirs(tags = query_lst, filters = filters_lst,
+                begin_date = begin_date, end_date = end_date):
     """
     Create directories and all json files from articles that meet query search
         parameters
@@ -14,8 +21,8 @@ def create_dirs(tags, filters, begin_date, end_date):
     Inputs:
         tags (lst): list of tags to look for. The tags to filter for are looked
             in the body, headline and byline of the articles.
-        filters (lst): list of filters where to look tags. They can be "headline"
-            and/or "body"
+        filters (lst): list of filters where to look tags. They can be
+            "headline", "lead_paragraph" and/or "body"
         begin_date (str): 8 digits (YYYYMMDD) string that specify the begin date
             or from when to start looking for articles.
         end_date (str): 8 digits (YYYYMMDD) string that specify the end date or
@@ -73,8 +80,8 @@ def get_json(tags, filters, begin_date, end_date):
     Inputs:
         tags (lst): list of tags to look for. The tags to filter for are looked
             in the body, headline and byline of the articles.
-        filters (lst): list of filters where to look tags. They can be "headline"
-            and/or "body"
+        filters (lst): list of filters where to look tags. They can be "headline",
+            "lead_paragraph" and/or "body"
         begin_date (str): 8 digits (YYYYMMDD) string that specify the begin date
             or from when to start looking for articles.
         end_date (str): 8 digits (YYYYMMDD) string that specify the end date or
@@ -123,8 +130,8 @@ def make_request(tags, filters, begin_date, end_date, page = "0"):
     Inputs:
         tags (lst): list of tags (strings) to look for. The tags to filter for
             are looked in the body, headline and byline of the articles.
-        filters (lst): list of filters where to look tags. They can be "headline"
-            and/or "body"
+        filters (lst): list of filters where to look tags. They can be "headline",
+            "lead_paragraph" and/or "body"
         begin_date (str): 8 digits (YYYYMMDD) string that specify the begin date
             or from when to start looking for articles.
         end_date (str): 8 digits (YYYYMMDD) string that specify the end date or
@@ -180,9 +187,7 @@ def create_url(tags, filters, begin_date, end_date, page):
     
     fq = "fq=" + " OR ".join(filters_copy)
 
-    api_key = "4AA7GDZ7giaN7m3rh8ULH5A60EWNlJHB"
-
     url = endpoint + fq + "&begin_date=" + begin_date + "&end_date=" + end_date +\
-            "&page=" + page + "&api-key=" + api_key
+            "&page=" + page + "&api-key=" + nyt_api_key
 
     return url
