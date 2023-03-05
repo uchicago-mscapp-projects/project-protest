@@ -34,3 +34,10 @@ HTML_TEXT = {
         """
     }
 }
+
+DATA_TEXT = {"paragraphs":{"p1":"Page description","p2":"News collection description",
+"p3":"Protest data description","p4":"Police data description"},
+"subtitles":{"news":"News data gathering descriprion","protest":"Protest data gathering description",
+"police":"Police data gathering description"}}
+
+METHODOLOGY_TEXT = {"paragraphs":{},"subtitles":{}}
