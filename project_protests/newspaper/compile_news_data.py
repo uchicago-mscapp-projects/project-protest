@@ -1,11 +1,12 @@
 import json
 import pandas as pd
 import os
-from .collecting_news import create_dirs
-from .clean_data import create_csv
-from ..project_protests.api_requests.the_guardian.make_requests import get_json_files
-from ..project_protests.api_requests.the_guardian.clean_files import create_news_df
-from ..config import the_guardian_api_key
+from project_protests.newspaper.nyt.collecting_news import create_dirs
+from project_protests.newspaper.nyt.clean_data import create_csv
+from project_protests.newspaper.the_guardian.make_requests import get_json_files
+from project_protests.newspaper.the_guardian.clean_files import create_news_csv
+from project_protests.config import the_guardian_api_key
+
 
 def compile_news_data(collect_data = False):
     """
@@ -26,15 +27,14 @@ def compile_news_data(collect_data = False):
 
     #Save json files as csv's
     create_csv()
-    create_news_df()
+    create_news_csv()
 
     #Compile csv's and save data
     current_dir = os.path.dirname(os.path.realpath(__file__))
-    parent_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
-    nyt_df = pd.read_csv(os.path.join(current_dir, "raw_data/nyt_articles.csv"))
-    the_guardian_df = pd.read_csv(os.path.join(parent_dir,
-    "project_protests/api_requests/the_guardian/data/the_guardian_compiled.csv"))
+    nyt_df = pd.read_csv(os.path.join(current_dir, "nyt/raw_data/nyt_articles.csv"))
+    the_guardian_df = pd.read_csv(os.path.join(current_dir,
+                                "the_guardian/data/the_guardian_compiled.csv"))
 
     the_guardian_df["newspaper"] = "The Guardian"
     nyt_df["newspaper"] = "New York Times"

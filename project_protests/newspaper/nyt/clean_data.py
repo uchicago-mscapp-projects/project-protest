@@ -1,18 +1,8 @@
 import pandas as pd
 import json
 import os
-# from ...collecting_news import create_dirs
-# from ...query_params import query_lst, from_date, to_date, filters_lst
-
-query_lst = ["blm", "black lives matter", "police brutality", "defund police",
-                "blue lives matter", "George Floyd", "Breonna Taylor",
-                "Tyre Nichols", "Eric Garner", "Ahmaud Arbery", "Tamir Rice"]
-tags_list = None
-from_date = "2017-01-01"
-to_date = "2023-01-31"
-page_size = 50
-page = 1
-filters_lst = ["headline", "lead_paragraph"]
+from project_protests.newspaper.nyt.collecting_news import create_dirs
+from project_protests.query_params import query_lst, filters_lst
 
 
 def create_csv(tags = query_lst, filters = filters_lst):
@@ -29,9 +19,7 @@ def create_csv(tags = query_lst, filters = filters_lst):
         end_date (str): 8 digits (YYYYMMDD) string that specify the end date or
             until when to stop looking for articles.
     """
-    ### ADD CREATE DIRS FUNCTION SO THIS FUNCTION DETONATES ALL THE PROCESS
-    #create_dirs(tags, filters, begin_date, end_date)
-    
+
     d = {"id": [], "date": [], "url": [], "headline": [], "abstract": [],
         "lead_paragraph": [], "type_of_material": [], "section_name": []}
 
@@ -45,13 +33,6 @@ def create_csv(tags = query_lst, filters = filters_lst):
 
     if 'nyt_articles.csv' in year_lst:
         year_lst.remove("nyt_articles.csv")
-    
-    ## CHECK IF THERE'S A WAY TO LIST ALL FILES INSIDE PARENT SUBDIRECTORIES
-    # THOUGHT THAT WITH SOMETHING LIKE os.walk(root) BUT I WOULD STILL HAVE TO
-    # ITERATE OVER THE SUBDIRECTORIES AND FILES OF THAT
-
-    # MAYBE WE SHOULD CREATE ALL THE JSON FILES IN ONE DIRECTORY WITH NAMES LIKE
-    # "[YEAR]_[MONTH]_[JSON ID].json"
 
     for year in year_lst:
         year_dir = os.path.join(new_dir, year)
@@ -67,11 +48,7 @@ def create_csv(tags = query_lst, filters = filters_lst):
                 data = json.load(f)
                 update_dict(d, data)
 
-    ## CHECK IF I RETURN JUST THE DATAFRAME OBJECT
-    ## CHECK IF SPLITTING THIS IN ANOTHER CREATE_DATAFGRAME FUNCTION
-
-    df = create_df(d, tags, filters)
-     
+    df = create_df(d, tags, filters)     
     df.to_csv(os.path.join(new_dir, "nyt_articles.csv"), index=False)
 
 def create_df(d, tags, filters):
