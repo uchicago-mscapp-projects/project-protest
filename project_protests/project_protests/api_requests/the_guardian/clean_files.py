@@ -11,11 +11,7 @@ import re
 #from .. import sentiment_analysis
 
 base_query_list = ["Black Lives Matter", "BLM", "Police Brutality", \
-<<<<<<< HEAD
-"George Floyd", "Breonna Taylor", "Tyrel Nichols", "Ahmaud Arbery", "Blue Lives Matter"]
-=======
 "George Floyd", "Breonna Taylor", "Tyre Nichols", "Ahmaud Arbery", "Blue Lives Matter"]
->>>>>>> dashboard
 
 def open_clean_data(json_file,query_list = base_query_list):
     """
