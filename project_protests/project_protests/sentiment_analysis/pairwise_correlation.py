@@ -27,19 +27,20 @@ def word_similarity(term):
     df_nyt = pd.read_csv(guardian_filepath)
     df['year'] = pd.DatetimeIndex(df['date']).year
     df_nyt['year'] = pd.DatetimeIndex(df_nyt['date']).year
-    df.merge(df_nyt[['year', 'lead_paragraph']])
+    df = pd.concat([df, df_nyt])
+    print(df)
     years = sorted(df['year'].unique())
     visualization_df = []
     for year in years:
         articles_text = df.loc[df['year']==year]['lead_paragraph'].str.cat(sep=' ')
         text = clean(articles_text)
         if year == 2017:
-            word2vec = Word2Vec(text, min_count = 3, sg=1, window=7)
+            word2vec = Word2Vec(text, min_count = 3, window=5)
         elif year == 2023:
             continue
         else:
-            word2vec = Word2Vec(text, min_count = 10, sg=1, window=7)
-        similar_words = word2vec.wv.most_similar(positive=[term], topn=10)
+            word2vec = Word2Vec(text, min_count = 10, window=5)
+        similar_words = word2vec.wv.most_similar(positive=[term], topn=15)
         for word, score in similar_words:
             visualization_df.append((word, score, year))
     visualize_simiilarity(visualization_df)
@@ -59,7 +60,7 @@ def clean(text):
     # splits a sentence into words
     words = [nltk.word_tokenize(sent) for sent in sentences]
     # removes stop words
-    additional_stop_words = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'often', 'accross', 'knows', 'known', 'weeks', 'would', 'should', 'still', 'more', 'many', 'know', 'said', 'says', 'also', 'want', 'make', 'one', 'two', 'four', 'three', 'took', 'already', 'may', 'look', 'who', 'whose', 'get', 'take', 'like', 'including', 'include', 'more', 'much', 'first', 'week', 'day', 'recently','year','years']
+    additional_stop_words = ['way', 'come', 'came', 'new', 'york', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'often', 'accross', 'knows', 'known', 'weeks', 'would', 'should', 'still', 'more', 'many', 'know', 'said', 'says', 'also', 'want', 'make', 'one', 'two', 'four', 'three', 'took', 'already', 'may', 'look', 'who', 'whose', 'get', 'take', 'like', 'including', 'include', 'more', 'much', 'first', 'week', 'day', 'recently','year','years']
     stop_words = stopwords.words('english') + additional_stop_words
     for i in range(len(words)):
         words[i] = [w for w in words[i] if w not in stop_words and len(w) > 2]
@@ -73,7 +74,7 @@ def visualize_simiilarity(visualization_df):
     top words related to "police" as seen in NYT and the Guardian data.
     '''
     df = pd.DataFrame(visualization_df, columns=["word", "score", "year"])
-    fig = make_subplots(rows=2,cols=3)
+    fig = make_subplots(rows=2,cols=3, subplot_titles=['2017', '2018', '2019', '2020', '2021', '2022'])
     for idx, year in enumerate(df['year'].unique()):
         chart = px.scatter(df[df['year']==year], x="word", y="score", color='year')
         chart.update_layout(title=str(year))
