@@ -9,11 +9,10 @@ from bs4 import BeautifulSoup
 import re
 #from .make_request import base_query_list
 #from .. import sentiment_analysis
+from project_protests.query_params import query_lst, from_date, to_date
 
-base_query_list = ["Black Lives Matter", "BLM", "Police Brutality", \
-"George Floyd", "Breonna Taylor", "Tyre Nichols", "Ahmaud Arbery", "Blue Lives Matter"]
 
-def open_clean_data(json_file,query_list = base_query_list):
+def open_clean_data(json_file,query_list = query_lst):
     """
     Open json_files created in py file "make_requests" and clean them
     Input 

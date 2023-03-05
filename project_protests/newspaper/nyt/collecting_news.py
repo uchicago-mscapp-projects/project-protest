@@ -4,20 +4,10 @@ import json
 import os
 import calendar
 import shutil
-#from ..query_params import query_lst, from_date, to_date, filters_lst
-#from ..config import nyt_api_key
+from project_protests.query_params import query_lst, from_date, to_date, filters_lst
+from project_protests.config import nyt_api_key
 
 # Clean dates from query_params file
-
-query_lst = ["blm", "black lives matter", "police brutality", "defund police",
-                "blue lives matter", "George Floyd", "Breonna Taylor",
-                "Tyre Nichols", "Eric Garner", "Ahmaud Arbery", "Tamir Rice"]
-tags_list = None
-from_date = "2017-01-01"
-to_date = "2023-01-31"
-page_size = 50
-page = 1
-filters_lst = ["headline", "lead_paragraph"]
 
 begin_date = from_date.replace("-", "")
 end_date = to_date.replace("-", "")
@@ -196,9 +186,6 @@ def create_url(tags, filters, begin_date, end_date, page):
         filters_copy[i] = fil + ":(" + " OR ".join(tags_copy) + ")"
     
     fq = "fq=" + " OR ".join(filters_copy)
-
-    # change later
-    nyt_api_key = "4AA7GDZ7giaN7m3rh8ULH5A60EWNlJHB"
     
     url = endpoint + fq + "&begin_date=" + begin_date + "&end_date=" + end_date +\
             "&page=" + page + "&api-key=" + nyt_api_key
