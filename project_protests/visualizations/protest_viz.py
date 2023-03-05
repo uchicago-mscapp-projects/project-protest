@@ -1,14 +1,15 @@
 import pandas as pd 
 import plotly.express as px 
 import plotly.graph_objects as go
-import dash 
 import os
+import pathlib
 
 def protest_data():
     """
     """
     # change to the create path using parent wd so it's not specific to me 
-    df = pd.DataFrame(pd.read_csv("/home/lisettesolis/30122-project-project-protest/project_protests/count_data/police-data.csv",on_bad_lines='skip'),\
+    filepath = pathlib.Path(__file__).parent.parent.parent / "project_protests/protest/police-data.csv"
+    df = pd.DataFrame(pd.read_csv(filepath),\
         columns = ['Location', 'Date', 'County', 'StateTerritory','City_Town'])
     df['Date']= pd.to_datetime(df['Date'])
     df['Month'] = df['Date'].dt.month
