@@ -1,12 +1,12 @@
 ####Task: Create HTML file using dash
 ###Author: JP Martinez
-###Last Modification: 03.03.2023
+###Last Modification: 03.04.2023
 
 import dash
 import pandas as pd
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc as dcc
+from dash import html as html
 import plotly.express as px
 import plotly.graph_objects as go
 from dash.dependencies import Input, Output
@@ -14,7 +14,7 @@ from text_inputs import HTML_TEXT
 
 app =dash.Dash(__name__,assets_folder="/assets",external_stylesheets=[dbc.themes.GRID])
 
-df = pd.read_excel("Test_data.xlsx", sheet_name = "Test_1")
+# df = pd.read_csv("Test_data.csv")
 
 background_color = "background-color : rgb(255, 251, 250)"
 style_h1 = {"text-align":"center", "border-width": "1px",
@@ -76,18 +76,18 @@ app.layout = html.Div(style={'backgroundColor': "rgb(255, 251, 250)",
 
 ])
 
-@app.callback(
-    [Output(component_id="Heatmap",component_property="figure")],
-    [Input(component_id = "select_city",component_property = "value")]
- )
-
-def update_graph(city_selected):
-    print(city_selected)
-    dff = df.copy()
-    if city_selected != "All cities":
-        dff = dff[dff["City"] == city_selected]
-    fig = px.line(dff, x = "Year", y = "Population")
-    return [fig]
+# @app.callback(
+#     [Output(component_id="Heatmap",component_property="figure")],
+#     [Input(component_id = "select_city",component_property = "value")]
+#  )
 
 if __name__ == "__main__":
     app.run_server(debug = True)
+
+# def update_graph(city_selected):
+#     print(city_selected)
+#     dff = df.copy()
+#     if city_selected != "All cities":
+#         dff = dff[dff["City"] == city_selected]
+#     fig = px.line(dff, x = "Year", y = "Population")
+#     return [fig]

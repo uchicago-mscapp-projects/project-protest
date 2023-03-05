@@ -11,7 +11,7 @@ import re
 #from .. import sentiment_analysis
 
 base_query_list = ["Black Lives Matter", "BLM", "Police Brutality", \
-"George Floyd", "Breonna Taylor", "Tyrel Nichols", "Ahmaud Abery", "Blue Lives Matter"]
+"George Floyd", "Breonna Taylor", "Tyre Nichols", "Ahmaud Arbery", "Blue Lives Matter"]
 
 def open_clean_data(json_file,query_list = base_query_list):
     """
@@ -85,7 +85,7 @@ def retrieve_text_html(df, varlist):
 
     return df
 
-def create_news_df():
+def create_news_csv():
     """
     Create dataframe with all the news information obtained 
     from the The Guardian API  
