@@ -11,7 +11,7 @@ import re
 #from .. import sentiment_analysis
 
 base_query_list = ["Black Lives Matter", "BLM", "Police Brutality", \
-"George Floyd", "Breonna Taylor", "Tyrel Nichols", "Ahmaud Abery", "Blue Lives Matter"]
+"George Floyd", "Breonna Taylor", "Tyre Nichols", "Ahmaud Arbery", "Blue Lives Matter"]
 
 def open_clean_data(json_file,query_list = base_query_list):
     """
@@ -85,14 +85,15 @@ def retrieve_text_html(df, varlist):
 
     return df
 
-def create_news_df():
+def create_news_csv():
     """
     Create dataframe with all the news information obtained 
     from the The Guardian API  
     Inputs:
     - none, it uses the json_files obtained from 
     """
-    json_directory = "json_files"
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    json_directory = os.path.join(current_dir, "json_files")
     df = open_clean_data("{}/the_guardian_1.json".format(json_directory))
 
     number_of_files = len(os.listdir(json_directory))
@@ -101,4 +102,4 @@ def create_news_df():
         df = pd.concat([df,open_clean_data("{}/the_guardian_{}.json".format(json_directory,i))]
         ,ignore_index = True)
 
-    df.to_csv("data/the_guardian_compiled.csv", index = False)
+    df.to_csv(os.path.join(current_dir, "data/the_guardian_compiled.csv"), index = False)

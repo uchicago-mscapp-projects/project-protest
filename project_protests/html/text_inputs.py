@@ -1,15 +1,24 @@
 ###Task: Add text used in dashboard appication
+###Last modified 03.04.23
 ###While this is hardcoded and adapted according to the final text requirements,
 ###Allows for easier modification of the dashboard app and allows less conflict
 
+#Description of dictionary keys
 #Title: h1 tags related text
-#subtitles: h2 tags related text  
+#subtitles: h2 tags related text
+#subsubtitles: h3 tags related text  
 #paragrahps: p tags related text
 
-HTML_TEXT ={ 
+HTML_TEXT = { 
     "Title" : """Project Protest: Analysis of the Black Lives Matter Movement after the
     George Floyd Murder""", 
-    "subtitles": {"Number of protest":"Analysis of number of protests"},
+    "subtitles": {"Number of protest":"Analysis of number of protests",
+    "Police":"Analyzing changes in police budget",
+    "News":"Analyzing changes in news coverage",
+    "Sentiment_analysis":"Analyzing perception in news coverage",
+    "Conclusion":"Conclusion"},
+    "sub_subtitles": {"coverage": "News coverage", "sentiment":"Sentiment Analysis",
+    "pairwise": "Pairwise correlations"},
     "paragraphs": {
         "introduction": """
         On May 25, Minneapolis police officers arrested George Floyd, a 46-year-old black man,

@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "project-protests"
+name = "project_protests"
 version = "0.1.0"
 description = ""
-authors = ["Josemaria Macedo - JP Martinez - Monica Nimaggada - Lisette Solis"]
+authors = ["Josemaria Macedo - JP Martinez - Monica Nimmagadda - Lisette Solis"]
 readme = "README.md"
 packages = [{include = "project_protests"}]
 
@@ -20,7 +20,7 @@ dash = "^2.8.1"
 pip = "^23.0.1"
 install = "^1.3.5"
 dash-renderer = "0.13.0"
-
+bs4 = "^0.0.1"
 
 [build-system]
 requires = ["poetry-core"]
