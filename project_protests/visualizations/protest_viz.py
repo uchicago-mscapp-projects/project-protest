@@ -23,49 +23,52 @@ def count_all():
     """
     df = protest_data()
     df_pivot = df.groupby(['Year']).size().to_frame().reset_index()
-    df_pivot.rename({0:'Count'}, axis='columns', inplace=True)
+    # df_pivot.rename({'0':'Count'}, axis='columns', inplace=True)
 
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=df_pivot["Year"], y=df_pivot['Count'], name="All", mode="lines"))
+    fig.add_trace(go.Scatter(x=df_pivot["Year"], y=df_pivot[0], name="All", mode="lines"))
     fig.update_layout(
         title="Number of Protests", template="simple_white"
     )
-    
     return fig.show()
 
 
 def go_cities():
-    """"
-    """
     df = protest_data()
-    dfg = df.groupby(['Year', 'City_Town']).size().to_frame().sort_values([0], ascending = False).head(10).reset_index()
-    cities = list(dfg['City_Town'].unique())
-    df['Count'] = 1
-    df = df.loc[df['City_Town'].isin(cities)]
-    
-    # pivot data by year 
-    df_pivot = df.groupby(['Year', 'City_Town']).count().reset_index()
+    # Agregate data at the national level 
+    df_national = df.groupby(['Year']).size().to_frame().reset_index()
+    df_national.rename(columns={0:'Count'}, inplace=True)
+
+    # pivot data for cities
+    cities = ['Baltimore', 'New York', 'Chicago', 'Detroit', 'Atlanta', 'Los Angeles', 'Minneapolis', 'Houston']
+    cities.sort()
+    df_cities = df.loc[df['City_Town'].isin(cities)]
+    df_pivot = df_cities.groupby(['Year', 'City_Town']).size().to_frame().reset_index()
+    df_pivot.rename(columns={0:'Count'}, inplace=True)
     
     # create traces for figure 
     trace = []
     dropdowns = []
     buttons = []
-    
+
+    # Add trace for national data
+    t = (go.Scatter(x=df_national["Year"], y=df_national['Count'], name='National', mode="lines"))
+    trace.append(t)
+    dropdowns.append({'label': 'National', 'value':t})
+    # Add trace for each city
     for i, city in enumerate(cities):
         sub_df = df_pivot.loc[df_pivot['City_Town'] == city]
         t = go.Scatter(x=sub_df["Year"], y=sub_df['Count'], name=city, mode="lines")        
         trace.append(t)
         dropdowns.append({'label': city, 'value':t})
 
-    # Define the initial layout with the dropdown menu
-    buttons =[ ]
-    
-    for i in range(len(dropdowns)):
-        visible = [False] * len(cities)
+    # Define the initial layout with the dropdown menu    
+    for i, dropdown in enumerate(dropdowns):
+        visible = [False] * len(dropdowns)
         visible[i] = True
         buttons.append({'args': [{'visible': visible}],
                         'label': dropdowns[i]['label'], \
-                        'method': 'update'
+                        'method': 'restyle'
                         })
 
     initial_layout = go.Layout(
@@ -77,13 +80,13 @@ def go_cities():
                 }
             ],
         xaxis=dict(title='Year'),
-        yaxis=dict(title='Count')
+        yaxis=dict(title='Count'),
+        title="Protests by Year", title_x=0.5,
+        template="simple_white", 
             )
 
     #Create the figure with the traces and initial layout
     fig = go.Figure(data=trace, layout=initial_layout)
-    fig.update_layout(
-    title="Cities with the most Protests", template="simple_white"
-    )
+
 
     return fig.show()
