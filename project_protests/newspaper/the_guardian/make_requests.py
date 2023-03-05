@@ -3,6 +3,9 @@ import json
 import lxml.html
 import requests
 import urllib.parse
+import os
+from project_protests.query_params import query_lst, from_date, to_date
+from project_protests.config import the_guardian_api_key
 
 ##Author: JP Martinez
 ##Task: Create querys and do requests for The Guardian API - Save JSON Files
@@ -26,8 +29,7 @@ def create_query_statement(key,list_parameters):
 
     return query
 
-base_query_list = ["Black Lives Matter", "BLM", "Police Brutality", \
-"George Floyd", "Breonna Taylor", "Tyre Nichols", "Ahmaud Arbery", "Blue Lives Matter"]
+base_query_list = query_lst
 
 
 def request_the_guardian(api_key, search = True, query_list = base_query_list, tags_list = None,
@@ -87,8 +89,8 @@ def request_the_guardian(api_key, search = True, query_list = base_query_list, t
     
     return response
 
-def get_json_files(api_key, search = True, query_list = base_query_list, tags_list = None,
- from_date = "2017-01-01", to_date = "2023-01-31", page_size = 50, page = 1):
+def get_json_files(api_key = the_guardian_api_key, search = True, query_list = query_lst, tags_list = None,
+ from_date = from_date, to_date = to_date, page_size = 50, page = 1):
     """
     Get json files
     Inputs:
@@ -110,7 +112,10 @@ def get_json_files(api_key, search = True, query_list = base_query_list, tags_li
     #Get number of pages to determine the number of requests to make
     n_pages = response_json["response"]["pages"]
 
-    with open("{}/the_guardian_1.json".format("json_files"), "w") as f:
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    json_files = os.path.join(current_dir, "json_files")
+
+    with open("{}/the_guardian_1.json".format(json_files), "w") as f:
         json.dump(response_json, f, indent=1)
         f.close()
     print("saved page n° 1/{}".format(n_pages))
@@ -121,7 +126,7 @@ def get_json_files(api_key, search = True, query_list = base_query_list, tags_li
         response_json = json.loads(response.text)
         print("saved page n° {}/{}".format(pag,n_pages))
         
-        with open("{}/the_guardian_{}.json".format("json_files",pag),"w") as f:
+        with open("{}/the_guardian_{}.json".format(json_files,pag),"w") as f:
             json.dump(response_json,f,indent=1)
             f.close()
 
