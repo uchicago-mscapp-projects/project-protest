@@ -4,10 +4,9 @@ import nltk
 from nltk.corpus import stopwords  
 import numpy as np
 from gensim.models import Word2Vec  
-import pandas as pd
-import plotly.express as px
-from plotly.subplots import make_subplots
 import pathlib
+import pandas as pd
+from ..visualizations.pairwise_viz import visualize_simiilarity
 # Monica Nimmagadda # 
 
 def word_similarity(term):
@@ -21,9 +20,9 @@ def word_similarity(term):
     Output: 2x3 chart with top 10 words per year and their corresponding
     similarity score
     '''
-    nyt_filepath = pathlib.Path(__file__).parent / "newspaper/nyt_articles.csv"
+    nyt_filepath = pathlib.Path(__file__).parent.parent / "newspaper/nyt/raw_data/nyt_articles.csv"
     df = pd.read_csv(nyt_filepath)
-    guardian_filepath = pathlib.Path(__file__).parent / "newspaper/the_guardian/data/the_guardian_compiled.csv"
+    guardian_filepath = pathlib.Path(__file__).parent.parent / "newspaper/the_guardian/data/the_guardian_compiled.csv"
     df_nyt = pd.read_csv(guardian_filepath)
     df['year'] = pd.DatetimeIndex(df['date']).year
     df_nyt['year'] = pd.DatetimeIndex(df_nyt['date']).year
@@ -66,21 +65,4 @@ def clean(text):
         words[i] = [w for w in words[i] if w not in stop_words and len(w) > 2]
     return  words
 
-def visualize_simiilarity(visualization_df):
-    '''
-    This function takes in the similarity words list and creates bar charts
-    by year for each set of words and score. 
-    The resulting plot is a 2x3 chart of each year 2017-2022 and their corresponding
-    top words related to "police" as seen in NYT and the Guardian data.
-    '''
-    df = pd.DataFrame(visualization_df, columns=["word", "score", "year"])
-    fig = make_subplots(rows=2,cols=3, subplot_titles=['2017', '2018', '2019', '2020', '2021', '2022'])
-    for idx, year in enumerate(df['year'].unique()):
-        chart = px.scatter(df[df['year']==year], x="word", y="score", color='year')
-        chart.update_layout(title=str(year))
-        if idx < 3:
-            fig.append_trace(chart.data[0], row=1, col=idx+1)
-        else:
-            fig.append_trace(chart.data[0], row=2, col=(idx+1)-3)
-    fig.show()
-    return None
+
