@@ -1571,8 +1571,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-<<<<<<< HEAD:poetry.lock
 content-hash = "c4034a4c055a9c930e1ee8f109e29470e4267437f06669f0ec3a089bcf7ce590"
-=======
-content-hash = "2bd17021f7dc41ce93e8a659600854899b87ce6d5969e7d847d40b86af547dae"
->>>>>>> update_sentiment_analysis:project_protests/poetry.lock
