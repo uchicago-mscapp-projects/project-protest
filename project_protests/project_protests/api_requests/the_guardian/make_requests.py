@@ -6,7 +6,7 @@ import urllib.parse
 
 ##Author: JP Martinez
 ##Task: Create querys and do requests for The Guardian API - Save JSON Files
-##Last date updated: 03.02.23
+##Last date updated: 03.04.23
 
 def create_query_statement(key,list_parameters):
     """
@@ -27,7 +27,11 @@ def create_query_statement(key,list_parameters):
     return query
 
 base_query_list = ["Black Lives Matter", "BLM", "Police Brutality", \
+<<<<<<< HEAD
 "George Floyd", "Breonna Taylor", "Tyrel Nichols", "Ahmaud Arbery", "Blue Lives Matter"]
+=======
+"George Floyd", "Breonna Taylor", "Tyre Nichols", "Ahmaud Arbery", "Blue Lives Matter"]
+>>>>>>> dashboard
 
 
 def request_the_guardian(api_key, search = True, query_list = base_query_list, tags_list = None,

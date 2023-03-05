@@ -1,6 +1,6 @@
 ##Author: JP Martinez
 ##Task: Clean The Guardian json files
-##Last update: 03.1.23
+##Last update: 03.04.23
 
 import json
 import pandas as pd
@@ -11,7 +11,11 @@ import re
 #from .. import sentiment_analysis
 
 base_query_list = ["Black Lives Matter", "BLM", "Police Brutality", \
+<<<<<<< HEAD
 "George Floyd", "Breonna Taylor", "Tyrel Nichols", "Ahmaud Arbery", "Blue Lives Matter"]
+=======
+"George Floyd", "Breonna Taylor", "Tyre Nichols", "Ahmaud Arbery", "Blue Lives Matter"]
+>>>>>>> dashboard
 
 def open_clean_data(json_file,query_list = base_query_list):
     """
