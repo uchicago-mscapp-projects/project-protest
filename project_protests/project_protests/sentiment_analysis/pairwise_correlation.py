@@ -21,8 +21,6 @@ def word_similarity(term):
     Output: 2x3 chart with top 10 words per year and their corresponding
     similarity score
     '''
-    # parent = 
-    # os.path.join(parent, directory) 
     nyt_filepath = pathlib.Path(__file__).parent.parent.parent / "clean_data/raw_data/nyt_articles.csv"
     df = pd.read_csv(nyt_filepath)
     guardian_filepath = pathlib.Path(__file__).parent.parent / "api_requests/the_guardian/data/the_guardian_compiled.csv"
@@ -77,8 +75,8 @@ def visualize_simiilarity(visualization_df):
     df = pd.DataFrame(visualization_df, columns=["word", "score", "year"])
     fig = make_subplots(rows=2,cols=3)
     for idx, year in enumerate(df['year'].unique()):
-        chart = px.bar(df[df['year']==year], x="word", y="score", color='year')
-        chart.update_layout(title_text=str(year))
+        chart = px.scatter(df[df['year']==year], x="word", y="score", color='year')
+        chart.update_layout(title=str(year))
         if idx < 3:
             fig.append_trace(chart.data[0], row=1, col=idx+1)
         else:

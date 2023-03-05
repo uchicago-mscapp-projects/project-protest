@@ -7,6 +7,10 @@ import pathlib
 # Monica Nimmagadda # 
 
 def process_protest_data():
+    '''
+    This function processes all of the protest data from the Crowd Consortium
+    for protests between Jan 2017 and Jan 2023.
+    '''
     df = create_df()
 
     # combine columns and drop old columns
