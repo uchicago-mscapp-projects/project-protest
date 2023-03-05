@@ -5,8 +5,8 @@
 import dash
 import pandas as pd
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 import plotly.express as px
 import plotly.graph_objects as go
 from dash.dependencies import Input, Output
@@ -17,7 +17,7 @@ from project_protests.visualizations.pairwise_viz import visualize_similarity
 
 app =dash.Dash(__name__,external_stylesheets=[dbc.themes.GRID])
 
-df = pd.read_csv("./Test_data.csv")
+df = pd.read_csv("/home/monican/capp30122/30122-project-project-protest/project_protests/html/Test_data.csv")
 
 fig_lisette = go_cities()
 fig_monica = visualize_similarity()
