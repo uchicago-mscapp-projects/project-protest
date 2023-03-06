@@ -1,10 +1,9 @@
 import pandas as pd 
 import plotly.express as px 
 import plotly.graph_objects as go
-import os
+from plotly.subplots import make_subplots
 import pathlib
-#import seaborn as sns
-from .protest_viz import protest_data
+from project_protests.visualizations.protest_viz import protest_data
 
 def nyt_data():
     # change to the create path using parent wd so it's not specific to me 
@@ -37,42 +36,42 @@ def news_counts():
     dropdowns = []
     buttons = []
 
+    # Create figure with secondary y-axis
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+
     # add trade for Guardian data 
     g_df = guardian_data()
     g_df_pivot = g_df.groupby(['Year']).size().to_frame().reset_index()
     g_df_pivot.rename(columns={0:'Count'}, inplace=True)
-    
-    g_trace = (go.Scatter(x=g_df_pivot["Year"], y=g_df_pivot['Count'], name="Guardian", mode="lines"))
-    traces.append(g_trace)
-    dropdowns.append({'label': 'Guardian', 'value':g_trace})
+    fig.add_trace(go.Scatter(x=g_df_pivot["Year"], y=g_df_pivot['Count'], name="Guardian", mode="lines"), secondary_y=False)
 
     # add trace for NYT data 
     n_df = nyt_data()
     n_df_pivot = n_df.groupby(['Year']).size().to_frame().reset_index()
     n_df_pivot.rename(columns={0:'Count'}, inplace=True)
-    
-    n_trace = (go.Scatter(x=n_df_pivot["Year"], y=n_df_pivot['Count'], name="NYT", mode="lines"))
-    traces.append(n_trace)
-    dropdowns.append({'label': 'NYT', 'value':n_trace})
+    fig.add_trace(go.Scatter(x=n_df_pivot["Year"], y=n_df_pivot['Count'], name="NYT", mode="lines"), secondary_y=False)
     
     # add trace for protest data
     p_df = protest_data()
     p_df_pivot = p_df.groupby(['Year']).size().to_frame().reset_index()
     p_df_pivot.rename({0:'Count'}, axis='columns', inplace=True)
-    p_df_pivot['Normalized Counts'] = p_df_pivot['Count']/5
+    fig.add_trace(go.Scatter(x=p_df_pivot["Year"], y=p_df_pivot['Count'], name="Normalized Protests", mode="lines"), secondary_y=True)
 
-    p_trace = go.Scatter(x=p_df_pivot["Year"], y=p_df_pivot['Normalized Counts'], name="Normalized Protests", mode="lines")
-    traces.append(p_trace)
+    fig.update_yaxes(title_text="News Stories (#)", secondary_y=False)
+    fig.update_yaxes(title_text="Protests (#)", secondary_y=True)
+    fig.update_layout(template="simple_white", 
+        title="Number of News Stories and Number of Protests", title_x=0.5)
     
-    fig = go.Figure(data=traces)
-    fig.update_layout(
-    title="Number of News Stories and Number of Protests", template="simple_white"
-    )
+    colors = ['#98A4D7', '#7BAE82', '#1e4477']
+    for i,_ in enumerate(fig.data):
+        fig.data[i].marker.color = colors[i]
 
     return fig
 
+
 def month_corr():
-   
+   """
+   """
    # add trace for newspaper data 
    df = guardian_data()
    nyt = nyt_data()

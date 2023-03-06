@@ -36,6 +36,7 @@ def visualize_sentiment_scores(column):
         else:
             fig.append_trace(chart.data[0], row=2, col=(idx+1)-3)
     
+    fig.update_layout(template="simple_white")
     for i,_ in enumerate(fig.data):
         fig.data[i].marker.color = "#1e4477"
 
