@@ -1,6 +1,8 @@
 import sys
 from project_protests.newspaper.compile_news_data import compile_news_data
 import os
+import project_protests.html.dashboard 
+import subprocess
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -19,14 +21,19 @@ if __name__ == "__main__":
                 add 'collect_data' as the last argument.")
             compile_news_data()
         elif sys.argv[1] == "dashboard":
-            execfile(os.path.join(current_dir, "html/dashboard.py"))
+            # exec(open(os.path.join(current_dir, "html/dashboard.py"))).read()
+            # python -m dashboard.py
+            subprocess.run(["python", "dashboard"])
+
         elif sys.argv[1] == "run":
             print("Will run both 'compile_news' and 'dashboard' without\
                     creating the JSON files by default. If you wanna create the\
                     JSON files before compiling add 'collect_data' as the last\
                     argument.")
             compile_news_data()
-            execfile(os.path.join(current_dir, "html/dashboard.py"))
+            # exec(open(os.path.join(current_dir, "html/dashboard.py"))).read()
+            # python -m dashboard.py
+            subprocess.run(["python", "dashboard"])
         else:
             print("Incorrect arguments. Send 'compile_news', 'dashboard' or\
                     'run'")
@@ -38,7 +45,9 @@ if __name__ == "__main__":
             print("Too many arguments. Send just 'dashboard'")
         elif sys.argv[1] == "run" and sys.argv[2] == "collect_data":
             compile_news_data(collect_data = True)
-            execfile(os.path.join(current_dir, "html/dashboard.py")) 
+            # exec(open(os.path.join(current_dir, "html/dashboard.py"))).read()
+            # python -m dashboard.py
+            subprocess.run(["python", "dashboard"])
         else:
             print("Incorrect arguments. Send 'compile_news', 'dashboard' or\
                     'run'")
