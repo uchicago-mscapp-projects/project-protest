@@ -12,30 +12,24 @@
 HTML_TEXT = { 
     "Title" : """Project Protest: Analysis of the Black Lives Matter Movement after the
     George Floyd Murder""", 
-    "subtitles": {"Number of protest":"Analysis of number of protests",
-    "Police":"Analyzing changes in police budget",
-    "News":"Analyzing changes in news coverage",
+    "subtitles": {"Number of protest":"Protests",
+    "Police":"Impact on Police Budget",
+    "News":"Analying News Coverage",
     "Sentiment_analysis":"Analyzing perception in news coverage",
     "Conclusion":"Conclusion"},
     "sub_subtitles": {"coverage": "News_coverage", "sentiment":"Sentiment Analysis",
     "pairwise": "Pairwise correlations"},
     "paragraphs": {
         "introduction": """
-        On May 25, Minneapolis police officers arrested George Floyd, a 46-year-old black man,
-     after a convenience store employee called 911 and told the police that Mr. Floyd had bought cigarettes with a 
-     counterfeit $20 bill. Seventeen minutes after the first squad car arrived at the scene, Mr. Floyd was unconscious 
-     and pinned beneath three police officers, showing no signs of life.
-        """,
-        "introduction_2": """
-        The murder of George Floyd lead to several protest nationwide regarding
-     the role of police in (...)
+        In 2020, millions of people participated in Black Lives Matter Protests throughout the USA and the world. These protests sparked by the murder of George Floyd some of the largest in USA history.1 Our project focuses on understanding these protests and their impact in relationship to media coverage and changes to municipal budgets. We were particularly interested in better understanding the extent of coverage on the protests and the tone of the stories, and in turn whether there is a relationship between the number protests, type of media coverage, and changes to municipal budgets.  
         """,
         "description": """In this project, we are analyzing (...)
         """
     }
 }
 
-DATA_TEXT = {"paragraphs":{"p1":"Page description","p2":"News collection description",
+DATA_TEXT = {"paragraphs":
+{"p1":"Page description","p2":"News collection description",
 "p3":"Protest data description","p4":"Police data description"},
 "subtitles":{"news":"News data gathering descriprion","protest":"Protest data gathering description",
 "police":"Police data gathering description"}}

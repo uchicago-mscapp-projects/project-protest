@@ -15,7 +15,7 @@ from project_protests.visualizations.protest_viz import go_cities
 from project_protests.visualizations.pairwise_viz import visualize_similarity
 
 
-app =dash.Dash(__name__,external_stylesheets=[dbc.themes.GRID])
+app =dash.Dash(__name__,external_stylesheets=[dbc.themes.PULSE])
 
 df = pd.read_csv("/home/monican/capp30122/30122-project-project-protest/project_protests/html/Test_data.csv")
 
@@ -33,41 +33,34 @@ style_h3 = {"text-align":"left","font-family":r"Arial", "text-decoration": "unde
 "font-weight":"bold","margin-left":"5cm","margin-right":"5cm"}
 
 
-
 title_container = dbc.Container(
     fluid = True,
     style={
-            "height": "70vh",
+            "height": "60vh",
             "background-color": "rgb(40,40,43)",
             "color": "rgb(255, 251, 250)",
             "display": "flex",
             "flex-direction": "column",
             "justify-content": "center",
-            "align-items": "center"
+            "align-items": "center",
+            "background": "url(https://static01.nyt.com/images/2020/06/10/us/10unrest-briefing-black-lives-matter/merlin_173249754_19a2cf59-a4a7-4bb9-8aaa-f910d7442ca3-superJumbo.jpg?quality=75&auto=webp)",
+            "background-size": "cover",
         },
     children=[html.H1(HTML_TEXT["Title"],style = style_h1)]
 )  
 
-select_bar = html.Div(
-    [
-        html.H2("Project Protest", className="display-4"),
-        html.Hr(),
-        dbc.Nav(
-            [
-                dbc.NavLink("Home", href="/", active="exact"),
-                dbc.NavLink("Data", href="/data", active="exact"),
-                dbc.NavLink("Methods", href="/methods", active="exact"),
-            ],
-            pills=True,
-        ),
+select_bar = dbc.Nav(
+    children=[
+        dbc.NavItem(dbc.NavLink("Home", href="/", active="exact")),
+        dbc.NavItem(dbc.NavLink("Data", href="/data", active="exact")),
+        dbc.NavItem(dbc.NavLink("Methods", href="/methods", active="exact")),
     ],
-    style={"background-color": "rgb(40,40,43)",
-            "color": "rgb(255, 251, 250)",
-            },
+    pills=True,
+    fill=True,
 )
+#, style={'background-color': "rgb(255, 251, 250)","color":"rgb(40,40,43)", "right-margin":"5cm","left-margin":"5cm"}
 
-content = html.Div(id="page-content", children = [], style={'background-color': "rgb(255, 251, 250)",
-    "color":"rgb(40,40,43)", "right-margin":"5cm","left-margin":"5cm"})
+content = html.Div(id="page-content",children = [])
 
 app.layout = html.Div(style={'background-color': "rgb(255, 251, 250)",
     "color":"rgb(40,40,43)", "right-margin":"5cm","left-margin":"5cm"},
@@ -101,7 +94,6 @@ def render_page_content(pathname):
     if pathname == "/":
         return [[html.Br(),
                 html.P(HTML_TEXT["paragraphs"]["introduction"],style = style_p),
-                html.P(HTML_TEXT["paragraphs"]["introduction_2"],style = style_p),
                 html.P(HTML_TEXT["paragraphs"]["description"],style = style_p),
                 html.Br(),
                 html.H2(HTML_TEXT["subtitles"]["Number of protest"],style = style_h2),
@@ -152,7 +144,7 @@ def render_page_content(pathname):
         return [[
                 html.H1("Data description",
                         style=style_h1),
-                html.P("Description of data")
+                html.P("Protest data is from the database maintained by the Crowd Counting Consortium.2 The database was started by two political science professors and aggregates self-reported protest data and data scraped from newspapers and social media event pages. Protest data is available from January 1, 2017 – January 31, 2023 and therefore the other data sources are limited to match these dates.  Protests were filtered based on whether the description included any of the following tags in the description. ")
                 ]]
     elif pathname == "/methods":
         return [[
