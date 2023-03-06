@@ -20,8 +20,8 @@ WORDS_TO_UPDATE = {
     "protest": 0, "brutality": 0
 }
 
-nyt_pathfile = pathlib.Path(__file__).parent.parent/ "newspaper/nyt/raw_data/nyt_articles.csv"
-the_guardian_pathfile = pathlib.Path(__file__).parent.parent / "newspaper/the_guardian/data/the_guardian_compiled.csv"
+nyt_filepath = pathlib.Path(__file__).parent.parent/ "newspaper/nyt/raw_data/nyt_articles.csv"
+guardian_filepath = pathlib.Path(__file__).parent.parent / "newspaper/the_guardian/data/the_guardian_compiled.csv"
 
 def edit_sentiment_dictionary(update_dict = WORDS_TO_UPDATE):
     """
@@ -46,7 +46,9 @@ def sentiment_scores(filename, columns_list):
     
     df = pd.read_csv(filename)
     bounds, label = BOUNDS["classifier"]
+
     for col in columns_list:
+        df[col] = df[col].astype(str) 
         if "{}".format(col) in df.columns:
             df["{}_score".format(col)] = df["{}".format(col)].apply(lambda x:
             sia.polarity_scores(x)["compound"])
@@ -58,8 +60,8 @@ def sentiment_scores(filename, columns_list):
 def visualize_sentiment_scores(column):
     columns = ['lead_paragraph', 'abstract', 'headline']
     
-    df_nyt = sentiment_scores(nyt_pathfile,[column])
-    df_tg = sentiment_scores(the_guardian_pathfile, [column])
+    df_nyt = sentiment_scores(nyt_filepath,[column])
+    df_tg = sentiment_scores(guardian_filepath, [column])
     df = pd.concat([df_nyt,df_tg])
     df["year"] = pd.DatetimeIndex(df['date']).year
     df = df[df["year"] != 2023]
