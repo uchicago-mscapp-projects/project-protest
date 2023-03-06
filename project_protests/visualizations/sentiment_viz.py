@@ -10,7 +10,7 @@ nyt_pathfile = pathlib.Path(__file__).parent.parent/ "newspaper/nyt/raw_data/nyt
 the_guardian_pathfile = pathlib.Path(__file__).parent.parent / "newspaper/the_guardian/data/the_guardian_compiled.csv"
 
 def columns():
-    columns = ['abstract', 'headline']
+    columns = ['abstract', 'headline', 'lead_paragraph']
     for col in columns:
         visualize_sentiment_scores(col)
 

@@ -31,10 +31,11 @@ def budget_viz():
         sub_df = df.loc[df['City'] == city]
         # fig.add_trace(go.Scatter(x=sub_df['variable'], y=sub_df['Total'], name=city), secondary_y=False,)
         fig.add_trace(
-            go.Scatter( 
+            go.Bar( 
                 x=sub_df['variable'],
                 y=sub_df['Total'], 
-                name=city, mode='lines'
+                name=city
+                # mode='lines'
             ), secondary_y=False,
         )
     
@@ -50,9 +51,9 @@ def budget_viz():
     #     )
 
 
-    fig.update_yaxes(title_text="Budget ($)", secondary_y=False)
-    fig.update_yaxes(title_text="Protests (#)", secondary_y=True)
+    fig.update_yaxes(title_text="Per Capita Budget ($)", secondary_y=False)
+    # fig.update_yaxes(title_text="Protests (#)", secondary_y=True)
     fig.update_layout(template="simple_white", 
-        title="Protests and Municipal budgets", title_x=0.5)
+        title="Per Capita Police Budget", title_x=0.5)
 
     return fig.show()

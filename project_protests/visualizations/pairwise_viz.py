@@ -2,11 +2,10 @@ import pandas as pd
 import plotly.express as px
 from plotly.subplots import make_subplots
 import pathlib
-from project_protests.sentiment_analysis.pairwise_correlation import word_similarity
+from sentiment_analysis.pairwise_correlation import word_similarity
 
 
 # Monica Nimmagadda # 
-
 
 
 def visualize_similarity():
@@ -26,5 +25,5 @@ def visualize_similarity():
             fig.append_trace(chart.data[0], row=1, col=idx+1)
         else:
             fig.append_trace(chart.data[0], row=2, col=(idx+1)-3)
-    #fig.show()
+   
     return fig
