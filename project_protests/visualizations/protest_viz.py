@@ -17,7 +17,7 @@ def protest_data():
     return df
 
 
-def go_cities():
+def filtereable_cities():
     df = protest_data()
     # Agregate data at the national level 
     df_national = df.groupby(['Year']).size().to_frame().reset_index()

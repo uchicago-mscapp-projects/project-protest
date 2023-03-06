@@ -9,6 +9,8 @@ from .protest_viz import protest_data
 from police_budget.budget_analysis import load_budget_data
 
 def budget_viz():
+    """"
+    """
     df = load_budget_data()
     df.drop(df.index[(df["Type"] == "Total") | (df["Type"] == "Population")], inplace=True)
     df.drop(columns=["Type"], inplace=True)

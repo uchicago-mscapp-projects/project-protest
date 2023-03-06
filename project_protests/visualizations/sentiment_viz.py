@@ -9,13 +9,13 @@ from sentiment_analysis.sentiment_analysis import sentiment_scores
 nyt_pathfile = pathlib.Path(__file__).parent.parent/ "newspaper/nyt/raw_data/nyt_articles.csv"
 the_guardian_pathfile = pathlib.Path(__file__).parent.parent / "newspaper/the_guardian/data/the_guardian_compiled.csv"
 
-def test(column):
-    df_nyt = sentiment_scores(nyt_pathfile,[column])
-    return df_nyt 
+def columns():
+    columns = ['abstract', 'headline']
+    for col in columns:
+        visualize_sentiment_scores(col)
+
 
 def visualize_sentiment_scores(column):
-    columns = ['lead_paragraph', 'abstract', 'headline']
-    
     df_nyt = sentiment_scores(nyt_pathfile,[column])
     df_tg = sentiment_scores(the_guardian_pathfile, [column])
     df = pd.concat([df_nyt,df_tg])
@@ -27,6 +27,7 @@ def visualize_sentiment_scores(column):
     fig = make_subplots(rows=2,cols=3, 
         subplot_titles=['2017', '2018', '2019', '2020', '2021', '2022'],)
 
+    
     for idx, year in enumerate(years):
         chart = px.histogram(df[df['year']==year], x="{}_score".format(column))
         chart.update_layout(title=str(year))
@@ -57,4 +58,4 @@ def visualize_sentiment_scores(column):
     fig['layout']['xaxis6']['title']='Score'
     fig['layout']['yaxis6']['title']='Count'
 
-    return fig
+    return fig.show()
