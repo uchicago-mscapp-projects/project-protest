@@ -1,7 +1,7 @@
 import sys
 from project_protests.newspaper.compile_news_data import compile_news_data
 import os
-import project_protests.html.dashboard 
+from  project_protests.html.dashboard import app 
 import subprocess
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
@@ -21,9 +21,10 @@ if __name__ == "__main__":
                 add 'collect_data' as the last argument.")
             compile_news_data()
         elif sys.argv[1] == "dashboard":
+            print("Run dashboard")
             # exec(open(os.path.join(current_dir, "html/dashboard.py"))).read()
             # python -m dashboard.py
-            subprocess.run(["python", "dashboard"])
+            app.run_server(port=8059,debug = True)
 
         elif sys.argv[1] == "run":
             print("Will run both 'compile_news' and 'dashboard' without\
@@ -33,7 +34,7 @@ if __name__ == "__main__":
             compile_news_data()
             # exec(open(os.path.join(current_dir, "html/dashboard.py"))).read()
             # python -m dashboard.py
-            subprocess.run(["python", "dashboard"])
+            app.run_server(port=8059,debug = True)
         else:
             print("Incorrect arguments. Send 'compile_news', 'dashboard' or\
                     'run'")
@@ -47,7 +48,7 @@ if __name__ == "__main__":
             compile_news_data(collect_data = True)
             # exec(open(os.path.join(current_dir, "html/dashboard.py"))).read()
             # python -m dashboard.py
-            subprocess.run(["python", "dashboard"])
+            app.run_server(port=8059,debug = True)
         else:
             print("Incorrect arguments. Send 'compile_news', 'dashboard' or\
                     'run'")

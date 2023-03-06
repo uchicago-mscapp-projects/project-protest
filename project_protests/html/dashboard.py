@@ -10,14 +10,14 @@ from dash import html
 import plotly.express as px
 import plotly.graph_objects as go
 from dash.dependencies import Input, Output
-from text_inputs import HTML_TEXT #, DATA_TEXT, METHODOLOGY_TEXT
+from project_protests.html.text_inputs import HTML_TEXT #, DATA_TEXT, METHODOLOGY_TEXT
 from project_protests.visualizations.protest_viz import go_cities
 from project_protests.visualizations.pairwise_viz import visualize_similarity
 
 
-app =dash.Dash(__name__,external_stylesheets=[dbc.themes.PULSE])
+app = dash.Dash(__name__,external_stylesheets=[dbc.themes.PULSE])
 
-df = pd.read_csv("/home/monican/capp30122/30122-project-project-protest/project_protests/html/Test_data.csv")
+df = pd.read_csv("/home/jpmartinez/30122-project-project-protest/project_protests/html/Test_data.csv")
 
 fig_lisette = go_cities()
 fig_monica = visualize_similarity()
@@ -154,4 +154,4 @@ def render_page_content(pathname):
                 ]]
 
 if __name__ == "__main__":
-    app.run_server(debug = True)
+    app.run_server(port=8059,debug = True)

@@ -72,3 +72,20 @@ def visualize_sentiment_scores(column):
         else:
             fig.append_trace(chart.data[0], row=2, col=(idx+1)-3)
     fig.show()
+
+def visualize_sentiment_scores_2(column):
+    
+    df_nyt = sentiment_scores(nyt_pathfile,[column])
+    df_tg = sentiment_scores(the_guardian_pathfile, [column])
+    df = pd.concat([df_nyt,df_tg])
+    df["year"] = pd.DatetimeIndex(df['date']).year
+    df = df[df["year"] != 2023]
+    fig = make_subplots(rows=2,cols=3)
+    for idx, year in enumerate(df['year'].unique()):
+        chart = px.histogram(df[df['year']==year], x="{}_score".format(column), color='year')
+        chart.update_layout(title=str(year))
+        if idx < 3:
+            fig.append_trace(chart.data[0], row=1, col=idx+1)
+        else:
+            fig.append_trace(chart.data[0], row=2, col=(idx+1)-3)
+    fig.show()
