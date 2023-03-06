@@ -1,11 +1,15 @@
 import pandas as pandas
 import re  
-import nltk  
+import nltk
+nltk.download([
+"punkt", "stopwords"
+])  
 from nltk.corpus import stopwords  
 import numpy as np
 from gensim.models import Word2Vec  
 import pathlib
 import pandas as pd
+
 # Monica Nimmagadda # 
 
 def word_similarity(term):
