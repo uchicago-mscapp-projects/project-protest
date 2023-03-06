@@ -29,26 +29,13 @@ def budget_viz():
     cities = list(df["City"].unique())
     for city in cities:
         sub_df = df.loc[df['City'] == city]
-        # fig.add_trace(go.Scatter(x=sub_df['variable'], y=sub_df['Total'], name=city), secondary_y=False,)
         fig.add_trace(
             go.Bar( 
                 x=sub_df['variable'],
                 y=sub_df['Total'], 
                 name=city
-                # mode='lines'
             ), secondary_y=False,
         )
-    
-    # # add trace for protest data
-    # p_df = protest_data()
-    # p_df_pivot = p_df.groupby(['Year']).size().to_frame().reset_index()
-    # p_df_pivot.rename({0:'Count'}, axis='columns', inplace=True,)
-    # fig.add_trace(go.Scatter( 
-    #         x=sub_df['variable'],
-    #         y=p_df_pivot['Count'], 
-    #         name="Protests", mode='lines'
-    #     ), secondary_y=True,
-    #     )
 
 
     fig.update_yaxes(title_text="Per Capita Budget ($)", secondary_y=False)

@@ -90,7 +90,10 @@ def month_corr():
    join = pd.merge(p_df_pivot, df_pivot, how ='left', on =['Month', 'Year'])
    join.rename(columns={'Count_x':'Count Protests', 'Count_y':'Count News'}, inplace=True)
 
-   return sns.heatmap(join.corr(), annot=True)
+   fig = px.imshow(join.corr(), text_auto=True, color_continuous_scale='deep')
+   fig.update_layout(title_text='Correlation Matrix', title_x=0.5)
+   
+   return fig
 
 def tag_counts():
     traces = []
