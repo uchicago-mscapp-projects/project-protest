@@ -69,7 +69,7 @@ def news_counts():
     title="Number of News Stories and Number of Protests", template="simple_white"
     )
 
-    return fig.show()
+    return fig
 
 def tag_counts():
     traces = []
@@ -127,7 +127,7 @@ def tag_counts():
     title="Stories with Tags", title_x=0.5, template="simple_white"
     )
 
-    return fig.show()
+    return fig
 
 
 def month_corr():
