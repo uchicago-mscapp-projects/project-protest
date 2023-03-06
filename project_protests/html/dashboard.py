@@ -13,19 +13,22 @@ from dash.dependencies import Input, Output
 from project_protests.html.text_inputs import HTML_TEXT #, DATA_TEXT, METHODOLOGY_TEXT
 from project_protests.visualizations.protest_viz import go_cities
 from project_protests.visualizations.pairwise_viz import visualize_similarity
-
-
+from project_protests.visualizations.news_viz import news_counts
+from project_protests.visualizations.sentiment_viz import visualize_sentiment_scores
+from project_protests.visualizations.budget_viz import budget_viz
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.PULSE])
 
-df = pd.read_csv("/home/jpmartinez/30122-project-project-protest/project_protests/html/Test_data.csv")
+# df = pd.read_csv("/home/monican/capp30122/30122-project-project-protest/project_protests/html/dashboard.py")
 
-fig_lisette = go_cities()
-fig_monica = visualize_similarity()
-
+fig_protest = go_cities()
+fig_similarity = visualize_similarity()
+fig_news = news_counts()
+# fig_month_corr = month_corr()
+fig_sentiment = visualize_sentiment_scores("headline")
+fig_budget = budget_viz()
 background_color = "background-color : rgb(255, 251, 250)"
-style_h1 = {"text-align":"center", "border-width": "1px",
-"font-family":r"Arial", "border-style": "solid"} 
-style_p = {"text-align":"left","font":r"120% Arial",
+style_h1 = {"padding":"25px", "text-align":"center", "border-width": "1px", "border-style": "solid"} 
+style_p = {"padding":"25px","text-align":"left",
 "margin-left":"5cm","margin-right":"5cm"}
 style_h2 = {"text-align":"left","font":r"150% Arial", "text-decoration": "underline",
 "font-weight":"bold","margin-left":"5cm","margin-right":"5cm"}  
@@ -52,15 +55,14 @@ title_container = dbc.Container(
 select_bar = dbc.Nav(
     children=[
         dbc.NavItem(dbc.NavLink("Home", href="/", active="exact")),
-        dbc.NavItem(dbc.NavLink("Data", href="/data", active="exact")),
-        dbc.NavItem(dbc.NavLink("Methods", href="/methods", active="exact")),
+        dbc.NavItem(dbc.NavLink("Data Collection and Analysis", href="/data", active="exact"))
     ],
     pills=True,
     fill=True,
 )
 #, style={'background-color': "rgb(255, 251, 250)","color":"rgb(40,40,43)", "right-margin":"5cm","left-margin":"5cm"}
 
-content = html.Div(id="page-content",children = [])
+content = html.Div(id="page-content",style={"margin":"50px"}, children = [])
 
 app.layout = html.Div(style={'background-color': "rgb(255, 251, 250)",
     "color":"rgb(40,40,43)", "right-margin":"5cm","left-margin":"5cm"},
@@ -93,50 +95,29 @@ def update_graph(city_selected,year_selected):
 def render_page_content(pathname):
     if pathname == "/":
         return [[html.Br(),
+                html.H2("Introduction",style = style_h3),
                 html.P(HTML_TEXT["paragraphs"]["introduction"],style = style_p),
-                html.P(HTML_TEXT["paragraphs"]["description"],style = style_p),
-                html.Br(),
-                html.H2(HTML_TEXT["subtitles"]["Number of protest"],style = style_h2),
-                dcc.Dropdown(id="select_city",
-                            options=[
-                                {"label": "Chicago", "value": "Chicago"},
-                                {"label": "LA", "value": "LA"},
-                                {"label": "Minneapolis", "value": "Minneapolis"},
-                                {"label": "New York", "value": "New York"},
-                                {"label":"All cities","value":"All cities"}],
-                            multi=False,
-                            value="All cities",
-                            style={'width': "40%","font":"Arial"}
-                            ),
-                html.Div(children=[dcc.Graph(id="Heatmap",figure={},style={'display': 'inline-block'}),
-                html.P("Description of first analysis: Heatmap of number of protests",style={'display': 'inline-block'})]),
-                #dcc.Graph(id="Heatmap",figure={}),
-                #html.P("Description of first analysis: Heatmap of number of protests",style = style_p),
+                html.P(HTML_TEXT["paragraphs"]["team"],style = style_p),
+                html.H2(HTML_TEXT["subtitles"]["Number of protest"],style = style_h3),
+                html.P(HTML_TEXT["graph_info"]["protest"], style=style_p),
+                dcc.Graph(id="protest_number",figure=fig_protest),
+                html.H2(HTML_TEXT["subtitles"]["News"], style=style_h3),
+                html.P(HTML_TEXT["graph_info"]["news"], style=style_p),
+                dcc.Graph(id="news_counts",figure=fig_news),
+                html.H2(HTML_TEXT["subtitles"]["Sentiment_analysis"], style=style_h3),
+                html.H2(HTML_TEXT["subtitles"]["Sentiment_Score"], style=style_h2),
+                html.P(HTML_TEXT["graph_info"]["sentiment"], style=style_p),
+                html.P(HTML_TEXT["graph_info"]["sentiment_2"], style=style_p),
+                html.P(HTML_TEXT["graph_info"]["sentiment_3"], style=style_p),
+                dcc.Graph(id="sentiment_score",figure=fig_sentiment),
+                html.H2(HTML_TEXT["subtitles"]["Pairwise"], style=style_h2),
+                html.P(HTML_TEXT["graph_info"]["pairwise"], style=style_p),
+                dcc.Graph(id="News_pairwise",figure=fig_similarity),
                 html.Br(),
                 html.H2(HTML_TEXT["subtitles"]["Police"],style = style_h2),
-                dcc.Dropdown(id="select_year",
-                            options=[
-                                {"label": "2018", "value": 2018},
-                                {"label": "2019", "value": 2019},
-                                {"label": "2020", "value": 2020},
-                                {"label": "2021", "value": 2021},
-                                {"label":"2022","value": 2020},
-                                {"label":"All years","value":"All years"}],
-                            multi=False,
-                            value="All years",
-                            style={'width': "40%","font":"Arial"}
-                            ),
-                dcc.Graph(id="Years",figure={}),
+                html.P(HTML_TEXT["graph_info"]["budget"], style=style_p),
+                dcc.Graph(id="budget",figure=fig_budget),
                 html.Br(),
-                html.H2(HTML_TEXT["subtitles"]["News"],style = style_h2),
-                html.P("Introduction paragraph about news",style = style_p),
-                html.H3(HTML_TEXT["sub_subtitles"]["coverage"], style = style_h3),
-                dcc.Graph(id="News",figure={}),
-                html.Br(),
-                html.H3(HTML_TEXT["sub_subtitles"]["sentiment"],style = style_h3),
-                dcc.Graph(id="News_sentiment",figure=fig_lisette),
-                html.H3(HTML_TEXT["sub_subtitles"]["pairwise"],style = style_h3),
-                dcc.Graph(id="News_pairwise",figure=fig_monica),
                 html.Br(),
                 html.H2(HTML_TEXT["subtitles"]["Conclusion"],style = style_h2) 
                             ]]

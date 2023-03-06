@@ -1,12 +1,10 @@
+# Task: Visualization for word similarity
+# Author: Monica Nimmagadda
 import pandas as pd
 import plotly.express as px
 from plotly.subplots import make_subplots
 import pathlib
 from sentiment_analysis.pairwise_correlation import word_similarity
-
-
-# Monica Nimmagadda # 
-
 
 def visualize_similarity():
     '''

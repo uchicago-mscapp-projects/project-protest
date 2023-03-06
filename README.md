@@ -24,7 +24,7 @@ When running the last command, up to two arguments can be called:
 1. ```compile_news```: Using the json files obtained from scraping data from The New York Times and The Guardian, it cleans and compile to create a compiled csv with the newspaper information. This argument can be combined with collect_data. 
 2. ```dashboard```: This argument runs the dashboard application Specifying this argument is equivalent as specifying no arguments, and can only be called as a standalone argument. 
 3. ```run```: This argument performs the two tasks described in compile_news and dashboard. This argument can be combined with collect_data.  
-4. ```collect_data```: This argument collect the data from The Guardian and The New York files API and store the json files obtained from the requests. This argument can only be called combined with either compile_news or run and can only be included as the last argument. (The approximate run time for this argument when using the default query arguments is approximate 25 minutes).
+4. ```collect_data```: This argument collect the data from The Guardian and The New York Times API and store the json files obtained from the requests. This argument can only be called combined with either compile_news or run and can only be included as the last argument. (The approximate run time for this argument when using the default query arguments is approximate 25 minutes). Before running the command with this argument, you should include a config.py file (sent privately) with the API keys for the New York Times and The   Guardian API in the "project_protest" package directory.
 
 ## Output
 The output of the above instructions will create an HTML site with two tabs:

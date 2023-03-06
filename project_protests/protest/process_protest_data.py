@@ -1,10 +1,11 @@
+# Task: load and clean protest data from Crowd Consortium
+# Author: Monica Nimmagadda
 import os
 import pandas as pd
 import glob
 from itertools import chain
 import numpy as np
 import pathlib
-# Monica Nimmagadda # 
 
 def process_protest_data():
     '''
