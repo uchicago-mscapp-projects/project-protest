@@ -1,6 +1,6 @@
 ####Task: Create HTML file using dash
-###Author: JP Martinez
-###Last Modification: 03.03.2023
+###Author: JP Martinez & Monica Nimmagadda
+###Last Modification: 03.05.2023
 
 import dash
 import pandas as pd
