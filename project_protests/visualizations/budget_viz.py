@@ -6,7 +6,7 @@ import os
 import pathlib
 import seaborn as sns
 from .protest_viz import protest_data
-from police_budget.budget_analysis import load_budget_data
+from project_protests.police_budget.budget_analysis import load_budget_data
 
 def budget_viz():
     """"
@@ -56,4 +56,4 @@ def budget_viz():
     fig.update_layout(template="simple_white", 
         title="Per Capita Police Budget", title_x=0.5)
 
-    return fig.show()
+    return fig

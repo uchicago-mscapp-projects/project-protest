@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import nltk
 import pathlib
-from sentiment_analysis.sentiment_analysis import sentiment_scores
+from project_protests.sentiment_analysis.sentiment_analysis import sentiment_scores
 
 nyt_filepath = pathlib.Path(__file__).parent.parent/ "newspaper/nyt/raw_data/nyt_articles.csv"
 the_guardian_filepath = pathlib.Path(__file__).parent.parent / "newspaper/the_guardian/data/the_guardian_compiled.csv"
