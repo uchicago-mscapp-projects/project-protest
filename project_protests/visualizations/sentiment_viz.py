@@ -6,8 +6,8 @@ import nltk
 import pathlib
 from sentiment_analysis.sentiment_analysis import sentiment_scores
 
-nyt_pathfile = pathlib.Path(__file__).parent.parent/ "newspaper/nyt/raw_data/nyt_articles.csv"
-the_guardian_pathfile = pathlib.Path(__file__).parent.parent / "newspaper/the_guardian/data/the_guardian_compiled.csv"
+nyt_filepath = pathlib.Path(__file__).parent.parent/ "newspaper/nyt/raw_data/nyt_articles.csv"
+the_guardian_filepath = pathlib.Path(__file__).parent.parent / "newspaper/the_guardian/data/the_guardian_compiled.csv"
 
 def test(column):
     df_nyt = sentiment_scores(nyt_pathfile,[column])
@@ -16,8 +16,8 @@ def test(column):
 def visualize_sentiment_scores(column):
     columns = ['lead_paragraph', 'abstract', 'headline']
     
-    df_nyt = sentiment_scores(nyt_pathfile,[column])
-    df_tg = sentiment_scores(the_guardian_pathfile, [column])
+    df_nyt = sentiment_scores(nyt_filepath,[column])
+    df_tg = sentiment_scores(the_guardian_filepath, [column])
     df = pd.concat([df_nyt,df_tg])
     df["year"] = pd.DatetimeIndex(df['date']).year
     df = df[df["year"] != 2023]
@@ -28,7 +28,7 @@ def visualize_sentiment_scores(column):
         subplot_titles=['2017', '2018', '2019', '2020', '2021', '2022'],)
 
     for idx, year in enumerate(years):
-        chart = px.histogram(df[df['year']==year], x="{}_score".format(column))
+        chart = px.histogram(df[df['year']==year], x="{}_score".format(column), nbins = 10)
         chart.update_layout(title=str(year))
         if idx < 3:
             fig.append_trace(chart.data[0], row=1, col=idx+1)
