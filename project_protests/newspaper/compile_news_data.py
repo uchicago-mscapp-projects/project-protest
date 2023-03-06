@@ -13,7 +13,7 @@ def compile_news_data(collect_data = False):
     Obtain the data from both NYT and The Guardian and compile it into one csv
     
     Inputs:
-        collect_data (bool): If True collect_json files, if False skip and move
+        collect_data (bool): If True collect_json files, if False skicompilep and move
         on to compilling csv files
     
     Return:

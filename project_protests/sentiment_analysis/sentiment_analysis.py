@@ -20,8 +20,8 @@ WORDS_TO_UPDATE = {
     "protest": 0, "brutality": 0
 }
 
-nyt_pathfile = pathlib.Path(__file__).parent.parent.parent / "clean_data/raw_data/nyt_articles.csv"
-the_guardian_pathfile = pathlib.Path(__file__).parent.parent / "api_requests/the_guardian/data/the_guardian_compiled.csv"
+nyt_filepath = pathlib.Path(__file__).parent.parent / "newspaper/nyt/raw_data/nyt_articles.csv"
+guardian_filepath = pathlib.Path(__file__).parent.parent / "newspaper/the_guardian/data/the_guardian_compiled.csv"
 
 def edit_sentiment_dictionary(update_dict = WORDS_TO_UPDATE):
     """
@@ -46,7 +46,9 @@ def sentiment_scores(filename, columns_list):
     
     df = pd.read_csv(filename)
     bounds, label = BOUNDS["classifier"]
+
     for col in columns_list:
+        df[col] = df[col].astype(str) 
         if "{}".format(col) in df.columns:
             df["{}_score".format(col)] = df["{}".format(col)].apply(lambda x:
             sia.polarity_scores(x)["compound"])
@@ -55,37 +57,20 @@ def sentiment_scores(filename, columns_list):
 
     return df
 
-    
 def visualize_sentiment_scores(column):
     
-    df_nyt = sentiment_scores(nyt_pathfile,[column])
-    df_tg = sentiment_scores(the_guardian_pathfile, [column])
+    df_nyt = sentiment_scores(nyt_filepath,[column])
+    df_tg = sentiment_scores(guardian_filepath, [column])
     df = pd.concat([df_nyt,df_tg])
     df["year"] = pd.DatetimeIndex(df['date']).year
     df = df[df["year"] != 2023]
-    fig = make_subplots(rows=2,cols=3)
+    fig = make_subplots(rows=2,cols=3,subplot_titles=['2017', '2018', '2019', '2020', '2021', '2022'])
     for idx, year in enumerate(df['year'].unique()):
-        chart = px.histogram(df[df['year']==year], x="{}_score".format(column), color='year')
+        chart = px.histogram(df[df['year']==year], x="{}_score".format(column), nbins = 10)
         chart.update_layout(title=str(year))
         if idx < 3:
             fig.append_trace(chart.data[0], row=1, col=idx+1)
         else:
-            fig.append_trace(chart.data[0], row=2, col=(idx+1)-3)
-    fig.show()
+            fig.append_trace(chart.data[0], row=2, col=(idx+1)-3)        
+    return fig
 
-def visualize_sentiment_scores_2(column):
-    
-    df_nyt = sentiment_scores(nyt_pathfile,[column])
-    df_tg = sentiment_scores(the_guardian_pathfile, [column])
-    df = pd.concat([df_nyt,df_tg])
-    df["year"] = pd.DatetimeIndex(df['date']).year
-    df = df[df["year"] != 2023]
-    fig = make_subplots(rows=2,cols=3)
-    for idx, year in enumerate(df['year'].unique()):
-        chart = px.histogram(df[df['year']==year], x="{}_score".format(column), color='year')
-        chart.update_layout(title=str(year))
-        if idx < 3:
-            fig.append_trace(chart.data[0], row=1, col=idx+1)
-        else:
-            fig.append_trace(chart.data[0], row=2, col=(idx+1)-3)
-    fig.show()

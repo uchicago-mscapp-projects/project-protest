@@ -46,6 +46,7 @@ def open_clean_data(json_file,query_list = query_lst):
     df = df.drop(columns = ["sectionName","isHosted", "pillarId","body","fields","apiUrl"])
 
     df = standarized_clean(df,["section", "headline","lead_paragraph"])
+    df.columns = df.columns.str.lower()
 
     return df
 
