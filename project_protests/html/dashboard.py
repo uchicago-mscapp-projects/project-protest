@@ -11,20 +11,19 @@ import plotly.express as px
 import plotly.graph_objects as go
 from dash.dependencies import Input, Output
 from project_protests.html.text_inputs import HTML_TEXT #, DATA_TEXT, METHODOLOGY_TEXT
-from project_protests.visualizations.protest_viz import go_cities
+from project_protests.visualizations.protest_viz import protest_by_city
 from project_protests.visualizations.pairwise_viz import visualize_similarity
 from project_protests.visualizations.news_viz import news_counts
 from project_protests.visualizations.sentiment_viz import visualize_sentiment_scores
 from project_protests.visualizations.budget_viz import budget_viz
-app = dash.Dash(__name__,external_stylesheets=[dbc.themes.PULSE])
+app = dash.Dash(__name__,external_stylesheets=[dbc.themes.PULSE],suppress_callback_exceptions=True)
 
 # df = pd.read_csv("/home/monican/capp30122/30122-project-project-protest/project_protests/html/dashboard.py")
 
-fig_protest = go_cities()
+fig_protest = protest_by_city()
 fig_similarity = visualize_similarity()
 fig_news = news_counts()
 # fig_month_corr = month_corr()
-fig_sentiment = visualize_sentiment_scores("headline")
 fig_budget = budget_viz()
 background_color = "background-color : rgb(255, 251, 250)"
 style_h1 = {"padding":"25px", "text-align":"center", "border-width": "1px", "border-style": "solid"} 
@@ -73,20 +72,18 @@ app.layout = html.Div(style={'background-color': "rgb(255, 251, 250)",
     content
 ])
 
-def update_graph(city_selected,year_selected):
-    print(city_selected)
-    print(year_selected)
-    dff = df.copy()
-    if city_selected != "All cities":
-        dff = dff[dff["City"] == city_selected]
-    fig = px.line(dff, x = "Year", y = "Population", color = "City")
 
-    dff = df.copy()
-    if year_selected != "All years":
-        dff = dff[dff["Year"] == year_selected]
-    fig_1 = px.line(dff, x = "Year", y = "Population", color = "City")
 
-    return [fig, fig_1]
+
+@app.callback(
+    [Output(component_id="sentiment_score_graph",component_property="figure")],
+    [Input(component_id="select_section",component_property="value")]
+)
+
+def update_sentiment_graph(section):
+    fig = visualize_sentiment_scores(section)
+    return [fig]
+
 
 @app.callback(
     [Output(component_id="page-content",component_property="children")],
@@ -109,7 +106,16 @@ def render_page_content(pathname):
                 html.P(HTML_TEXT["graph_info"]["sentiment"], style=style_p),
                 html.P(HTML_TEXT["graph_info"]["sentiment_2"], style=style_p),
                 html.P(HTML_TEXT["graph_info"]["sentiment_3"], style=style_p),
-                dcc.Graph(id="sentiment_score",figure=fig_sentiment),
+                dcc.Dropdown(id="select_section",
+                            options=[
+                                {"label": "Headline", "value": "headline"},
+                                {"label": "Lead Paragrah", "value": "lead_paragraph"},
+                                ],
+                            multi=False,
+                            value="lead_paragraph",
+                            style={'width': "40%","font":"Arial"}
+                            ),
+                dcc.Graph(id="sentiment_score_graph",figure={}),
                 html.H2(HTML_TEXT["subtitles"]["Pairwise"], style=style_h2),
                 html.P(HTML_TEXT["graph_info"]["pairwise"], style=style_p),
                 dcc.Graph(id="News_pairwise",figure=fig_similarity),
