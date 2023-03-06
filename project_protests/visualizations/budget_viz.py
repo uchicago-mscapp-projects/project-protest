@@ -1,0 +1,56 @@
+import pandas as pd 
+import plotly.express as px 
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import os
+import pathlib
+import seaborn as sns
+from .protest_viz import protest_data
+from police_budget.budget_analysis import load_budget_data
+
+def budget_viz():
+    df = load_budget_data()
+    df.drop(df.index[(df["Type"] == "Total") | (df["Type"] == "Population")], inplace=True)
+    df.drop(columns=["Type"], inplace=True)
+    # df =  df.loc[(df['City'] == 'Atlanta')]
+    df = df.melt(id_vars="City", value_name="Total")
+
+    # create traces for figure 
+    traces = []
+    dropdowns = [] 
+    buttons = []
+
+    # Create figure with secondary y-axis
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+
+    # add traces for cities
+    cities = list(df["City"].unique())
+    for city in cities:
+        sub_df = df.loc[df['City'] == city]
+        # fig.add_trace(go.Scatter(x=sub_df['variable'], y=sub_df['Total'], name=city), secondary_y=False,)
+        fig.add_trace(
+            go.Scatter( 
+                x=sub_df['variable'],
+                y=sub_df['Total'], 
+                name=city, mode='lines'
+            ), secondary_y=False,
+        )
+    
+    # # add trace for protest data
+    # p_df = protest_data()
+    # p_df_pivot = p_df.groupby(['Year']).size().to_frame().reset_index()
+    # p_df_pivot.rename({0:'Count'}, axis='columns', inplace=True,)
+    # fig.add_trace(go.Scatter( 
+    #         x=sub_df['variable'],
+    #         y=p_df_pivot['Count'], 
+    #         name="Protests", mode='lines'
+    #     ), secondary_y=True,
+    #     )
+
+
+    fig.update_yaxes(title_text="Budget ($)", secondary_y=False)
+    fig.update_yaxes(title_text="Protests (#)", secondary_y=True)
+    fig.update_layout(template="simple_white", 
+        title="Protests and Municipal budgets", title_x=0.5)
+
+    return fig.show()
