@@ -15,7 +15,7 @@ def load_budget_data():
     for col in cols[2:-1]:
         budget_df[col] = budget_df[col].astype(float)
     budget_df = project_population(budget_df)
-    visualize_budget(budget_df)
+    # visualize_budget(budget_df)
     return budget_df
 
 def project_population(df):
@@ -28,6 +28,13 @@ def project_population(df):
             df.loc[row.Index, 'FY22'] = fy_22
             fy_23 = fy_22 + (fy_22 * percent_change)
             df.loc[row.Index, 'FY23'] = fy_23
+    
+    return df
+
+def normalize_budget():
+    df = load_budget_data()
+    df.sort_values(by=['City', 'Type'], ascending=False, inplace=True)
+    
     return df
 
 def visualize_budget(df):
