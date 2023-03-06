@@ -35,6 +35,9 @@ def visualize_sentiment_scores(column):
         else:
             fig.append_trace(chart.data[0], row=2, col=(idx+1)-3)
     
+    for i,_ in enumerate(fig.data):
+        fig.data[i].marker.color = "#1e4477"
+
     # edit axis labels
     fig['layout']['xaxis']['title']='Score'
     fig['layout']['yaxis']['title']='Count'
@@ -53,14 +56,5 @@ def visualize_sentiment_scores(column):
     
     fig['layout']['xaxis6']['title']='Score'
     fig['layout']['yaxis6']['title']='Count'
-
-    for i,_ in enumerate(fig.data):
-        fig.data[i].marker.color = "#1e4477"
-
-    # for i, _ in enumerate(years):
-    #     xaxis = 'xaxis'+str(i)
-    #     yaxis = 'yaxis'+str(i)
-    #     fig['layout'][xaxis]['title']='Score'
-    #     fig['layout'][yaxis]['title']='Count'
 
     return fig
