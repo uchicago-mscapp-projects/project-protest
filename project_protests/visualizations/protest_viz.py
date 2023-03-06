@@ -13,7 +13,6 @@ def protest_data():
     df['Date']= pd.to_datetime(df['Date'])
     df['Month'] = df['Date'].dt.month
     df['Year'] = df['Date'].dt.year 
-    
     return df
 
 
@@ -71,5 +70,10 @@ def protest_by_city():
 
     #Create the figure with the traces and initial layout
     fig = go.Figure(data=trace, layout=initial_layout)
+    
+    colors = ['#98A4D7', '#7BAE82', '#1e4477', '#F0CF56', '#9B5B41', '#3F367A', '#4D797D', \
+        '#98A4D7', '#7BAE82', '#1e4477', '#F0CF56', '#9B5B41', '#3F367A', '#4D797D']
+    for i,_ in enumerate(fig.data):
+        fig.data[i].marker.color = colors[i]
 
     return fig

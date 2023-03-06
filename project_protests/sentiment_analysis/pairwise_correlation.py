@@ -40,6 +40,7 @@ def word_similarity(term):
         similar_words = word2vec.wv.most_similar(positive=[term], topn=15)
         for word, score in similar_words:
             visualization_df.append((word, score, year))
+    
     return visualization_df
 
 def clean(text):
