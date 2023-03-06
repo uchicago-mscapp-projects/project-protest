@@ -3,7 +3,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import os
 import pathlib
-import seaborn as sns
+#import seaborn as sns
 from .protest_viz import protest_data
 
 def nyt_data():

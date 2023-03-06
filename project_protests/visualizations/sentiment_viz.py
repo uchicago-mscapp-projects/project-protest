@@ -61,4 +61,4 @@ def visualize_sentiment_scores(column):
     fig['layout']['xaxis6']['title']='Score'
     fig['layout']['yaxis6']['title']='Count'
 
-    return fig.show()
+    return fig

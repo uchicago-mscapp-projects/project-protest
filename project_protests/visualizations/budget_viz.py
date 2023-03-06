@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import os
 import pathlib
-import seaborn as sns
+#import seaborn as sns
 from .protest_viz import protest_data
 from project_protests.police_budget.budget_analysis import load_budget_data
 
