@@ -15,10 +15,11 @@ More information on our data collection and analysis can be found on the HTML si
 
 ## Instructions to Run
 To run the project the following steps need to be followed: 
-1. Clone repository  
-2. Run ```poetry install``` to install the neccesary packages 
-3. Run ```poetry shell``` to activate the virtual environment
-4. From the directory *“30122-project-project-protest"* run from the command line ```poetry run python -m project_protest <arguments>``` 
+1. Clone repository
+2. Run pip install --user dash-bootstrap-components in the terminal 
+3. Run ```poetry install``` to install the neccesary packages 
+4. Run ```poetry shell``` to activate the virtual environment
+5. From the directory *“30122-project-project-protest"* run from the command line ```poetry run python -m project_protest <arguments>``` 
 
 When running the last command without any arguments, you will run the dashboard application by default. You can also call up to two arguments:
 1. ```compile_news```: Using the json files obtained from scraping data from The New York Times and The Guardian, it cleans and compile to create a compiled csv with the newspaper information. This argument can be combined with collect_data.
