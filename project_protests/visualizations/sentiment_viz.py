@@ -16,16 +16,8 @@ def columns():
 
 
 def visualize_sentiment_scores(column):
-<<<<<<< HEAD
     df_nyt = sentiment_scores(nyt_filepath,[column])
     df_tg = sentiment_scores(the_guardian_filepath, [column])
-=======
-    columns = ['lead_paragraph', 'abstract', 'headline']
-    
-    df_nyt = sentiment_scores(nyt_filepath,[column])
-    df_tg = sentiment_scores(the_guardian_filepath, [column])
-
->>>>>>> 6c65308ceb24aa0e9c42a7edcd9c830ddc4afe45
     df = pd.concat([df_nyt,df_tg])
     df["year"] = pd.DatetimeIndex(df['date']).year
     df = df[df["year"] != 2023]

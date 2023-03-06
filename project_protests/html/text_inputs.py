@@ -10,11 +10,10 @@
 #paragrahps: p tags related text
 
 HTML_TEXT = { 
-    "Title" : """Project Protest: Analysis of the Black Lives Matter Movement after the
-    George Floyd Murder""", 
+    "Title" : """Project Protest: Analysis of the impact of Black Lives Matter protest 2017-2023""", 
     "subtitles": {"Number of protest":"Protests",
     "Police":"Impact on Police Budget",
-    "News":"Analying News Coverage",
+    "News":"Analyzing News Coverage",
     "Sentiment_analysis":"Analyzing perception in news coverage",
     "Conclusion":"Conclusion",
     "Sentiment_Score": "Sentiment Scores of News Headlines",
@@ -22,7 +21,7 @@ HTML_TEXT = {
     "sub_subtitles": {"coverage": "News_coverage", "sentiment":"Sentiment Analysis",
     "pairwise": "Pairwise correlations"},
     "paragraphs": {
-        "team": "Team: Lisette Solis, Josemaria Macedo, JP Martinez, Monica Nimmagadda", 
+        "team": "Team: Josemaria Macedo, JP Martinez, Monica Nimmagadda, Lisette Solis", 
         "introduction": """
         In 2020, millions of people participated in Black Lives Matter Protests throughout the USA and the world. These protests sparked by the murder of George Floyd some of the largest in USA history. Our project focuses on understanding these protests and their impact in relationship to media coverage and changes to municipal budgets. We were particularly interested in better understanding the extent of coverage on the protests and the tone of the stories, and in turn whether there is a relationship between the number protests, type of media coverage, and changes to municipal budgets.
         """
@@ -39,9 +38,21 @@ HTML_TEXT = {
 }
 
 DATA_TEXT = {"paragraphs":
-{"p1":"Page description","p2":"News collection description",
-"p3":"Protest data description","p4":"Police data description"},
-"subtitles":{"news":"News data gathering descriprion","protest":"Protest data gathering description",
-"police":"Police data gathering description"}}
-
-METHODOLOGY_TEXT = {"paragraphs":{},"subtitles":{}}
+{"p1":"""Protest data is from the database maintained by the Crowd Counting Consortium. 
+The database was started by two political science professors and aggregates self-reported protest data and 
+data scraped from newspapers and social media event pages. Protest data is available from January 1, 2017 – January 
+31, 2023 and therefore the other data sources are limited to match these dates.  Protests were filtered based on whether 
+the description included any of the following tags in the description.""",
+"tags_protest":"Tags: ['police', 'black lives', 'racial justice', 'criminal justice', 'racism', 'white supremacy'] ",
+"p2": "Newspaper data was pulled from the New York Times (NYT) and The Guardian API. Queries were limited to include stories published between January 1, 2017 – January 31, 2023, that include any of following tags in either the headline (both NYT and Guardian), lead paragraph (NYT) or abstract (Guardian). The difference in whether to search in the lead paragraph or the abstract is explained by the options available for each API. ",
+"tags_news": "Tags: ['blm', 'black lives matter', 'police brutality', 'blue lives matter', 'George Floyd', 'Breonna Taylor', 'Tyre Nichols', 'Ahmaud Arbery']",
+"p3": "Budget data was collected manually from publicly available budgets. Since this data was collected manually, it was only collected for the eight US cities with the highest police spending per capita.",
+"p4": "The sentiment scores in the headline and lead paragraph of the news collected from The Guardian and The New York Times were calculated using a pre-trained model from the package nltk.",
+"p5": "During the analysis we discovered that there were important limitations in applying the sentiment pre-trained model to the data. The pre-trained model assigns for each word a score from -1 to 1 and compounds it along a string to get a score, where words associated with negative sentiments are categorize with a score below 0 while those associated with positive sentiments are assigned a value over 0.",
+"p6" : "Given the complexity of the issue, the results of the sentiment score are highly likely to not be reflective of the level of support for the Black Lives Matter movements and the reforms being pursued by them.  For example, an article could have a negative score explained by a story that supports the movement but uses words with a negative score due to anger to the killing of a person, which at the same time could not be distinguishable –in terms of final score– from a news article that does not support the movement and uses words to refer to protestors as rioters. ",
+"p7": "To correct for this issue, it would have been preferable to train our own data to determine which stories are associated with support and opposition to the Black Lives Matter movement which could not be included due to capacity and time constraints. To perform this correctly, we would have needed to obtained newspaper data from other media sources to end with a diverse sample of stories that show support and opposition since the two media sources occupied are usually associated with being more progressive. ",
+"p8":"Using the Word2Vec package, a model was created using a corpus of lead paragraphs from the New York Times and the Guardian articles with the tags and dates listed above. The model filtered to 5 words on either side of the given term (in this case, “police”) and mentioned 10 or more times for 2018-2022 and 5 times for 2017. This is because our corpus for 2017 was limited. The model mapped the distance between the given term, scoring them on a scale of –1 to 1. The more similar a word is to the given term, the closer it is to 1. ",
+"p9":"To visualize this data, each year is plotted with their top 15 words related to “police” and their similarity scores. Because of the selective filtering we did on the initial newspaper dataset, the words usually surrounding “police” are related to the BLM movement. There is a noticeable trend of words related to George Floyd in 2020 and 2021. You can also see the decrease in score before 2020 and after 2021 as more articles were produced around the Floyd protests in 2020. ",
+"p10":"Creating a corpus with any articles mentioning police would give us a greater understanding of how description of police has changed over time. Given our limitations of article requests, we were unable to run a more neutral model. ",
+"p11":"Our results were inconclusive about how the protests shaped news coverage and resulted in policy change. Our analysis was limited by limitations of the data available and packages we chose which we further explain in the Data and Methods section.  ",
+"p12":"Looking forward, we hope to see more work done on understanding media portrayal of inherently difficult topics like police brutality. Media coverage of these events plays a significant role in shaping political will and mobilization to enact policy change. However, despite mass mobilization around Black Lives Matter, we did not notice a change in trend of municipal budgets after the 2020 protests. This prompts the question of how effective protests are in creating policy impact. "}}
