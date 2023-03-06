@@ -23,7 +23,7 @@ def nyt_data():
     return df
 
 def guardian_data():
-    filepath = pathlib.Path(__file__).parent.parent.parent /  "project_protests/newspaper/the_guardian/data/the_guardian_compiled.csv"
+    filepath = pathlib.Path(__file__).parent.parent.parent / "project_protests/newspaper/the_guardian/data/the_guardian_compiled.csv"
     df = pd.read_csv(filepath)
     df['date']= pd.to_datetime(df['date'])
     df['Month'] = df['date'].dt.month

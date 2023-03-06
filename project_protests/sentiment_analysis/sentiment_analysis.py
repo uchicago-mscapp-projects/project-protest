@@ -3,7 +3,6 @@
 ##Last date updated: 03.01.23
 
 import pandas as pandas
-import os
 import nltk
 import pandas as pd
 import pathlib
