@@ -18,21 +18,6 @@ def protest_data():
     return df
 
 
-def count_all():
-    """
-    """
-    df = protest_data()
-    df_pivot = df.groupby(['Year']).size().to_frame().reset_index()
-    # df_pivot.rename({'0':'Count'}, axis='columns', inplace=True)
-
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=df_pivot["Year"], y=df_pivot[0], name="All", mode="lines"))
-    fig.update_layout(
-        title="Number of Protests", template="simple_white"
-    )
-    return fig.show()
-
-
 def go_cities():
     df = protest_data()
     # Agregate data at the national level 
