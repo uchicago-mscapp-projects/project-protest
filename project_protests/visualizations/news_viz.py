@@ -69,7 +69,31 @@ def news_counts():
     title="Number of News Stories and Number of Protests", template="simple_white"
     )
 
-    return fig.show()
+    return fig
+
+def month_corr():
+   
+   # add trace for newspaper data 
+   df = guardian_data()
+   nyt = nyt_data()
+   df = pd.concat([df, nyt], ignore_index = True)
+
+   #  pivot data by year 
+   df_pivot = df.groupby(['Year', 'Month']).size().to_frame().reset_index()
+   df_pivot.rename(columns={0:'Count'}, inplace=True)
+
+    # add trace for protest data
+   p_df = protest_data()
+   p_df_pivot = p_df.groupby(['Year', 'Month']).size().to_frame().reset_index()
+   p_df_pivot.rename({0:'Count'}, axis='columns', inplace=True)
+
+   join = pd.merge(p_df_pivot, df_pivot, how ='left', on =['Month', 'Year'])
+   join.rename(columns={'Count_x':'Count Protests', 'Count_y':'Count News'}, inplace=True)
+
+   fig = px.imshow(join.corr(), text_auto=True, color_continuous_scale='deep')
+   fig.update_layout(title_text='Correlation Matrix', title_x=0.5)
+   
+   return fig
 
 def tag_counts():
     traces = []
@@ -127,26 +151,4 @@ def tag_counts():
     title="Stories with Tags", title_x=0.5, template="simple_white"
     )
 
-    return fig.show()
-
-
-def month_corr():
-   
-   # add trace for newspaper data 
-   df = guardian_data()
-   nyt = nyt_data()
-   df = pd.concat([df, nyt], ignore_index = True)
-
-   #  pivot data by year 
-   df_pivot = df.groupby(['Year', 'Month']).size().to_frame().reset_index()
-   df_pivot.rename(columns={0:'Count'}, inplace=True)
-
-    # add trace for protest data
-   p_df = protest_data()
-   p_df_pivot = p_df.groupby(['Year', 'Month']).size().to_frame().reset_index()
-   p_df_pivot.rename({0:'Count'}, axis='columns', inplace=True)
-
-   join = pd.merge(p_df_pivot, df_pivot, how ='left', on =['Month', 'Year'])
-   join.rename(columns={'Count_x':'Count Protests', 'Count_y':'Count News'}, inplace=True)
-
-   return sns.heatmap(join.corr(), annot=True)
+    return fig

@@ -9,13 +9,13 @@ from sentiment_analysis.sentiment_analysis import sentiment_scores
 nyt_filepath = pathlib.Path(__file__).parent.parent/ "newspaper/nyt/raw_data/nyt_articles.csv"
 the_guardian_filepath = pathlib.Path(__file__).parent.parent / "newspaper/the_guardian/data/the_guardian_compiled.csv"
 
-def test(column):
-    df_nyt = sentiment_scores(nyt_pathfile,[column])
-    return df_nyt 
+def columns():
+    columns = ['abstract', 'headline', 'lead_paragraph']
+    for col in columns:
+        visualize_sentiment_scores(col)
+
 
 def visualize_sentiment_scores(column):
-    columns = ['lead_paragraph', 'abstract', 'headline']
-    
     df_nyt = sentiment_scores(nyt_filepath,[column])
     df_tg = sentiment_scores(the_guardian_filepath, [column])
     df = pd.concat([df_nyt,df_tg])
@@ -27,14 +27,18 @@ def visualize_sentiment_scores(column):
     fig = make_subplots(rows=2,cols=3, 
         subplot_titles=['2017', '2018', '2019', '2020', '2021', '2022'],)
 
+    
     for idx, year in enumerate(years):
-        chart = px.histogram(df[df['year']==year], x="{}_score".format(column), nbins = 10)
+        chart = px.histogram(df[df['year']==year], x="{}_score".format(column), nbins=10)
         chart.update_layout(title=str(year))
         if idx < 3:
             fig.append_trace(chart.data[0], row=1, col=idx+1)
         else:
             fig.append_trace(chart.data[0], row=2, col=(idx+1)-3)
     
+    for i,_ in enumerate(fig.data):
+        fig.data[i].marker.color = "#1e4477"
+
     # edit axis labels
     fig['layout']['xaxis']['title']='Score'
     fig['layout']['yaxis']['title']='Count'
@@ -54,13 +58,4 @@ def visualize_sentiment_scores(column):
     fig['layout']['xaxis6']['title']='Score'
     fig['layout']['yaxis6']['title']='Count'
 
-    for i,_ in enumerate(fig.data):
-        fig.data[i].marker.color = "#1e4477"
-
-    # for i, _ in enumerate(years):
-    #     xaxis = 'xaxis'+str(i)
-    #     yaxis = 'yaxis'+str(i)
-    #     fig['layout'][xaxis]['title']='Score'
-    #     fig['layout'][yaxis]['title']='Count'
-
-    return fig
+    return fig.show()
