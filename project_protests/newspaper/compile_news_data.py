@@ -1,3 +1,7 @@
+##Author: JP Martinez
+##Task: Compile The Guardian and NYT newspaper data
+##Last update: 03.6.23
+
 import json
 import pandas as pd
 import os

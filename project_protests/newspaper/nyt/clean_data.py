@@ -1,7 +1,12 @@
+##################################################
+# Author: Josemaria Macedo Carrillo              #
+# Task: Create CSV file with NYT newspaper data  #
+# Last updated: 03-07-23                         #
+##################################################
+
 import pandas as pd
 import json
 import os
-from project_protests.newspaper.nyt.collecting_news import create_dirs
 from project_protests.query_params import query_lst, filters_lst
 
 
@@ -11,7 +16,7 @@ def create_csv(tags = query_lst, filters = filters_lst):
 
     Inputs:
         tags (lst): list of tags to look for. The tags to filter for are looked
-            in the body, headline and byline of the articles.
+            in the filters of the articles.
         filters (lst): list of filters where to look tags. They can be "headline",
             "lead_paragraph" and/or "body"
         begin_date (str): 8 digits (YYYYMMDD) string that specify the begin date
@@ -26,10 +31,6 @@ def create_csv(tags = query_lst, filters = filters_lst):
     current_dir = os.path.dirname(os.path.realpath(__file__))
     new_dir = os.path.join(current_dir, "raw_data")
     year_lst = os.listdir(new_dir)
-    
-    # Add conditional in case there already existed a csv file and we're replacing
-    # without having to eliminate all the jsons and previous csv file before
-    # with the create_dirs function of the collecting_news module
 
     if 'nyt_articles.csv' in year_lst:
         year_lst.remove("nyt_articles.csv")
@@ -57,7 +58,7 @@ def update_dict(d, json):
     Update a dictionary with the columns and observations for our csv file
     
     Inputs:
-        d (dict):  dictionary just with keys and no values
+        d (dict):  dictionary just with keys and values to update
         json (dict): json with news articles
 
     Return (dict): dictionary with added values for each key
@@ -92,21 +93,13 @@ def create_df(d, tags, filters):
     df = df.astype('string')
     df["date"] = df["date"].astype('datetime64')
 
-    # for tag in tags:
-    #     df[tag] = False
-    #     for fil in filters:
-    #         for index, row in df.iterrows():
-    #             #print(index, fil)
-    #             if pd.isna(row[fil]):
-    #                 continue
-    #             if tag.lower() in row[fil].lower():
-    #                 df[tag][index] = True
-    
-
     for tag in tags:
         df[tag] = False
         for fil in filters:
-            df[fil] = df[fil].apply(lambda x: x.lower())
-            df[tag] = df[fil].apply(lambda x: tag.lower() in x if df[tag] is False else False)
-
+            for index, row in df.iterrows():
+                if pd.isna(row[fil]):
+                    continue
+                if tag.lower() in row[fil].lower():
+                    df[tag][index] = True
+    
     return df
