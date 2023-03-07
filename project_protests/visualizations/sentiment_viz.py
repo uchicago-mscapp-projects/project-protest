@@ -1,3 +1,6 @@
+"""
+Lisette Solis & JP Martinez
+"""
 import pandas as pd 
 import plotly.express as px 
 import plotly.graph_objects as go
@@ -10,24 +13,33 @@ nyt_filepath = pathlib.Path(__file__).parent.parent/ "newspaper/nyt/raw_data/nyt
 the_guardian_filepath = pathlib.Path(__file__).parent.parent / "newspaper/the_guardian/data/the_guardian_compiled.csv"
 
 def columns():
+    """
+    Function to iterate through the text columns and visualize sentiment scores 
+    """
     columns = ['abstract', 'headline', 'lead_paragraph']
     for col in columns:
         visualize_sentiment_scores(col)
 
 
 def visualize_sentiment_scores(column):
+    """
+    Helper function to create figure for each column
+
+    Return: Plotly figure
+    """
+    # merge NYT and Guardian data into dataframe 
     df_nyt = sentiment_scores(nyt_filepath,[column])
     df_tg = sentiment_scores(the_guardian_filepath, [column])
     df = pd.concat([df_nyt,df_tg])
     df["year"] = pd.DatetimeIndex(df['date']).year
     df = df[df["year"] != 2023]
-    
+   
+   # make subplots for each year
     years = list(df['year'].unique())
     years.sort()
     fig = make_subplots(rows=2,cols=3, 
         subplot_titles=['2017', '2018', '2019', '2020', '2021', '2022'],)
-
-    
+    # add traces to subplots 
     for idx, year in enumerate(years):
         chart = px.histogram(df[df['year']==year], x="{}_score".format(column), nbins=10)
         chart.update_layout(title=str(year))
@@ -35,11 +47,11 @@ def visualize_sentiment_scores(column):
             fig.append_trace(chart.data[0], row=1, col=idx+1)
         else:
             fig.append_trace(chart.data[0], row=2, col=(idx+1)-3)
-    
+     
+    # set background and line colors 
     fig.update_layout(template="simple_white")
     for i,_ in enumerate(fig.data):
         fig.data[i].marker.color = "#1e4477"
-
     # edit axis labels
     fig['layout']['xaxis']['title']='Score'
     fig['layout']['yaxis']['title']='Count'
