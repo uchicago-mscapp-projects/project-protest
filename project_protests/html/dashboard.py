@@ -59,7 +59,6 @@ select_bar = dbc.Nav(
     pills=True,
     fill=True,
 )
-#, style={'background-color': "rgb(255, 251, 250)","color":"rgb(40,40,43)", "right-margin":"5cm","left-margin":"5cm"}
 
 content = html.Div(id="page-content",style={"margin":"50px"}, children = [])
 
@@ -72,9 +71,6 @@ app.layout = html.Div(style={'background-color': "rgb(255, 251, 250)",
     content
 ])
 
-
-
-
 @app.callback(
     [Output(component_id="sentiment_score_graph",component_property="figure")],
     [Input(component_id="select_section",component_property="value")]
@@ -83,7 +79,6 @@ app.layout = html.Div(style={'background-color': "rgb(255, 251, 250)",
 def update_sentiment_graph(section):
     fig = visualize_sentiment_scores(section)
     return [fig]
-
 
 @app.callback(
     [Output(component_id="page-content",component_property="children")],

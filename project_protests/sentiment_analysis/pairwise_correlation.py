@@ -1,3 +1,5 @@
+# Author: Monica Nimmagadda
+# Task: pairwise correlation for a given term and dataset
 import pandas as pandas
 import re  
 import nltk
@@ -10,8 +12,6 @@ from gensim.models import Word2Vec
 import pathlib
 import pandas as pd
 
-# Monica Nimmagadda # 
-
 def word_similarity(term):
     '''
     This function reads news data, calls the clean function, and creates a 
@@ -23,13 +23,9 @@ def word_similarity(term):
     Output: 2x3 chart with top 10 words per year and their corresponding
     similarity score
     '''
-    nyt_filepath = pathlib.Path(__file__).parent.parent / "newspaper/nyt/raw_data/nyt_articles.csv"
-    df = pd.read_csv(nyt_filepath)
-    guardian_filepath = pathlib.Path(__file__).parent.parent / "newspaper/the_guardian/data/the_guardian_compiled.csv"
-    df_nyt = pd.read_csv(guardian_filepath)
+    compiled_filepath = pathlib.Path(__file__).parent.parent / "newspaper/news_compiled.csv"
+    df = pd.read_csv(compiled_filepath)
     df['year'] = pd.DatetimeIndex(df['date']).year
-    df_nyt['year'] = pd.DatetimeIndex(df_nyt['date']).year
-    df = pd.concat([df, df_nyt])
     years = sorted(df['year'].unique())
     visualization_df = []
     for year in years:
