@@ -1,3 +1,6 @@
+"""
+Lisette Solis
+"""
 import pandas as pd 
 import plotly.express as px 
 import plotly.graph_objects as go
@@ -5,33 +8,12 @@ from plotly.subplots import make_subplots
 import pathlib
 from project_protests.visualizations.protest_viz import protest_data
 
-def nyt_data():
-    # change to the create path using parent wd so it's not specific to me 
-    filepath = pathlib.Path(__file__).parent.parent.parent / "project_protests/newspaper/nyt/raw_data/nyt_articles.csv"
-    df = pd.read_csv(filepath)
-    df['date']= pd.to_datetime(df['date'])
-    df.rename({'black lives matter':'Black Lives Matter', 
-                'police brutality': 'Police Brutality',
-                'defund police':'Defund Police',
-                'blue lives matter':'Blue Lives Matter',
-                'blm' : 'BLM'}, axis='columns', inplace=True)
-    df['Month'] = df['date'].dt.month
-    df['Year'] = df['date'].dt.year
-    df['Newspaper'] = 'NYT'
-
-    return df
-
-def guardian_data():
-    filepath = pathlib.Path(__file__).parent.parent.parent / "project_protests/newspaper/the_guardian/data/the_guardian_compiled.csv"
-    df = pd.read_csv(filepath)
-    df['date']= pd.to_datetime(df['date'])
-    df['Month'] = df['date'].dt.month
-    df['Year'] = df['date'].dt.year 
-    df['Newspaper'] = 'Guardian'
-
-    return df
-
 def news_counts():
+    """
+    Visualize the number of news stories with the number of protests 
+
+    Return: Plotly figure
+    """
     traces = []
     dropdowns = []
     buttons = []
@@ -40,17 +22,11 @@ def news_counts():
     fig = make_subplots(specs=[[{"secondary_y": True}]])
 
     # add trade for Guardian data 
-    g_df = guardian_data()
-    g_df_pivot = g_df.groupby(['Year']).size().to_frame().reset_index()
-    g_df_pivot.rename(columns={0:'Count'}, inplace=True)
+    g_df_pivot = pivot_guardian(guardian_data( ))
     fig.add_trace(go.Scatter(x=g_df_pivot["Year"], y=g_df_pivot['Count'], name="Guardian", mode="lines"), secondary_y=False)
-
     # add trace for NYT data 
-    n_df = nyt_data()
-    n_df_pivot = n_df.groupby(['Year']).size().to_frame().reset_index()
-    n_df_pivot.rename(columns={0:'Count'}, inplace=True)
+    n_df_pivot = pivot_nyt(nyt_data())
     fig.add_trace(go.Scatter(x=n_df_pivot["Year"], y=n_df_pivot['Count'], name="NYT", mode="lines"), secondary_y=False)
-    
     # add trace for protest data
     p_df = protest_data()
     p_df_pivot = p_df.groupby(['Year']).size().to_frame().reset_index()
@@ -65,12 +41,14 @@ def news_counts():
     colors = ['#98A4D7', '#7BAE82', '#1e4477']
     for i,_ in enumerate(fig.data):
         fig.data[i].marker.color = colors[i]
-
     return fig
 
 
 def month_corr():
    """
+   Correlation matrix between count of stories and protests 
+
+   Return: Plotly figure
    """
    # add trace for newspaper data 
    df = guardian_data()
@@ -80,8 +58,7 @@ def month_corr():
    #  pivot data by year 
    df_pivot = df.groupby(['Year', 'Month']).size().to_frame().reset_index()
    df_pivot.rename(columns={0:'Count'}, inplace=True)
-
-    # add trace for protest data
+   # pivot data for protests 
    p_df = protest_data()
    p_df_pivot = p_df.groupby(['Year', 'Month']).size().to_frame().reset_index()
    p_df_pivot.rename({0:'Count'}, axis='columns', inplace=True)
@@ -90,15 +67,72 @@ def month_corr():
    join.rename(columns={'Count_x':'Count Protests', 'Count_y':'Count News'}, inplace=True)
 
    fig = px.imshow(join.corr(), text_auto=True, color_continuous_scale='deep')
-   fig.update_layout(title_text='Correlation Matrix', title_x=0.5)
-   
+   fig.update_layout(title_text='Correlation Matrix', title_x=0.5) 
    return fig
 
+def pivot_nyt(df): 
+    """
+    Helper function to pibvot the NY Times data 
+ 
+    Return: Plotly figure
+    """
+    n_df_pivot = df.groupby(['Year']).size().to_frame().reset_index()
+    n_df_pivot.rename(columns={0:'Count'}, inplace=True)
+    return n_df_pivot
+
+def nyt_data():
+    """
+    Create dataframe from CSV of NY Times data
+
+    Return: Plotly figure
+    """
+    filepath = pathlib.Path(__file__).parent.parent.parent / "project_protests/newspaper/nyt/raw_data/nyt_articles.csv"
+    df = pd.read_csv(filepath)
+    df['date']= pd.to_datetime(df['date'])
+    df.rename({'black lives matter':'Black Lives Matter', 
+                'police brutality': 'Police Brutality',
+                'defund police':'Defund Police',
+                'blue lives matter':'Blue Lives Matter',
+                'blm' : 'BLM'}, axis='columns', inplace=True)
+    df['Month'] = df['date'].dt.month
+    df['Year'] = df['date'].dt.year
+    df['Newspaper'] = 'NYT'
+    return df
+
+def pivot_guardian(df):
+    """
+    Helper function to pivot the guardian data
+
+    Return: Pandas DataFrame
+    """
+    g_df_pivot = df.groupby(['Year']).size().to_frame().reset_index()
+    g_df_pivot.rename(columns={0:'Count'}, inplace=True)
+    return g_df_pivot
+
+def guardian_data():
+    """
+    Create dataframe from CSV of Guardian data
+
+    Return: Plotly figure
+    """
+    filepath = pathlib.Path(__file__).parent.parent.parent / "project_protests/newspaper/the_guardian/data/the_guardian_compiled.csv"
+    df = pd.read_csv(filepath)
+    df['date']= pd.to_datetime(df['date'])
+    df['Month'] = df['date'].dt.month
+    df['Year'] = df['date'].dt.year 
+    df['Newspaper'] = 'Guardian'
+    return df
+
 def tag_counts():
+    """
+    Visualization of the number of stories that can be filtered by tag
+    Note: not in final HTML dashboard 
+
+    Retunr: Plotly figure
+    """
     traces = []
     dropdowns = []
     buttons = []
-
     tags = ['Black Lives Matter',
                 'BLM',
                 'Police Brutality',
@@ -107,12 +141,10 @@ def tag_counts():
                 'Tyre Nichols',
                 'Ahmaud Arbery',
                 'Blue Lives Matter']
-
-    # add trace for Guardian data 
     df = guardian_data()
     nyt = nyt_data()
     df = pd.concat([df, nyt], ignore_index = True)
-
+    # traces for each tag
     for i, tag in enumerate(tags):
         sub_df = df.loc[df[tag] == True]
         df_pivot = sub_df.groupby(['Year', tag]).size().to_frame().reset_index()
@@ -120,10 +152,7 @@ def tag_counts():
         trace = go.Scatter(x=df_pivot["Year"], y=df_pivot['Count'], name=tag, mode="lines")        
         traces.append(trace)
         dropdowns.append({'label': tag, 'value':trace})
-    
-    # Define the initial layout with the dropdown menu
-    buttons =[ ]
-
+    # add dropdown options
     for i in range(len(dropdowns)):
         visible = [False] * len(tags)
         visible[i] = True
@@ -131,7 +160,7 @@ def tag_counts():
                         'label': dropdowns[i]['label'], \
                         'method': 'update'
                         })
-
+    # define layout
     initial_layout = go.Layout(
         updatemenus=[{'buttons': buttons,
             'direction': 'down',
@@ -143,11 +172,10 @@ def tag_counts():
         xaxis=dict(title='Year'),
         yaxis=dict(title='Count')
             )
-
-    #Create the figure with the traces and initial layout
     fig = go.Figure(data=traces, layout=initial_layout)
     fig.update_layout(
-    title="Stories with Tags", title_x=0.5, template="simple_white"
+    title="Stories with Tags", 
+    title_x=0.5, 
+    template="simple_white"
     )
-
     return fig
