@@ -8,6 +8,11 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 def load_budget_data():
+    """"
+    Function to create dataframe from CSV
+    
+    Return: Pandas DataFrame
+    """
     budget_filepath = pathlib.Path(__file__).parent / "police_budget_by_city.csv"
     budget_df = pd.DataFrame(pd.read_csv(budget_filepath), 
         columns= ['City','Type','FY16', 'FY17', 'FY18', 'FY19', 'FY20', 'FY21', 'FY22', 'FY23'])
@@ -21,6 +26,10 @@ def load_budget_data():
     return budget_df
 
 def project_population(df):
+    """
+    Function to estimate missing years of of population 
+    based on prior years growth rate
+    """
     for row in df.itertuples():
         if row.Type == 'Population':
             fy_21 = row.FY21
@@ -34,6 +43,9 @@ def project_population(df):
     return df 
         
 def normalize_population(df):
+    """
+    Function to calculate per capita budget for police
+    """
     cities = list(df['City'].unique())   
     for city in cities:
             # fill in missing budget values using the projected population totals 
@@ -48,28 +60,5 @@ def normalize_population(df):
             df.loc[(df['City'] == city) & (df['Type'] == 'Normalized'), 'FY23'] = norm_23
     
     return df
-
-def visualize_budget(df):
-    df_population = df.loc[df['Type'] == 'Population']
-    df_budget = df.loc[df['Type'] == 'Total']
-    fig = make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(
-        go.Scatter( 
-            x=df_budget['City'],
-            y=df_budget[df_budget.columns[2:9]], 
-            name="Budget"
-        ), secondary_y=False,
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            x=df_population['City'],
-            y=df_population[df_population.columns[2:9]], 
-            name="Population"
-        ), secondary_y=True,
-    )
-    fig.update_yaxes(title_text="Budget ($)", secondary_y=False)
-    fig.update_yaxes(title_text="Population (#)", secondary_y=True)
-    fig.show()
 
 
