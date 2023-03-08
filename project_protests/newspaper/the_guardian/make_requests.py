@@ -17,7 +17,7 @@ def create_query_statement(key,list_parameters):
     Input:
     key (str): api-key
     list_parameters (list): List of parameters to add to the query
-    Return: (str: encoded query statement to pass to the )
+    Return: (str: encoded query statement to pass to the api query)
     """
     query_terms_encoded_list = []
     

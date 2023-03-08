@@ -77,6 +77,12 @@ app.layout = html.Div(style={'background-color': "rgb(255, 251, 250)",
 )
 
 def update_sentiment_graph(section):
+    """
+    Updated sentiment analysis graph according to the selective options
+    Input:
+    - section (str): Possible values of the dropdown for the graph
+    Retur: Graph figure.
+    """
     fig = visualize_sentiment_scores(section)
     return [fig]
 
@@ -85,6 +91,13 @@ def update_sentiment_graph(section):
     [Input(component_id="url",component_property="pathname")]
 )
 def render_page_content(pathname):
+    """
+    Function to determine the content of the different pages.
+    Input:
+    -pathname (str): Page to update.
+    Output:
+    List of HTML components that are included in the page to update.
+    """
     if pathname == "/":
         return [[html.Br(),
                 html.H2("Introduction",style = style_h2),

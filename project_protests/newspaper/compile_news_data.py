@@ -1,4 +1,4 @@
-##Author: JP Martinez
+##Author: JP Martinez and Josemaria Macedo
 ##Task: Compile The Guardian and NYT newspaper data
 ##Last update: 03.6.23
 

@@ -7,15 +7,16 @@ import pandas as pd
 import os 
 from bs4 import BeautifulSoup
 import re
-#from .make_request import base_query_list
-#from .. import sentiment_analysis
 from project_protests.query_params import query_lst, from_date, to_date
 
 
 def open_clean_data(json_file,query_list = query_lst):
     """
     Open json_files created in py file "make_requests" and clean them
-    Input 
+    Input:
+    - json_file (json): Json file to clean
+    Return:
+    df (Dataframe): Dataframe with cleaned json articles information
     """
     ##Open Json-files into dictionary
     df = pd.read_json(json_file)
@@ -60,7 +61,7 @@ def standarized_clean(df,varlist):
     -varlist: List of columns to be cleaned
 
     Return:
-        Dataframed with cleaned specified columns 
+    Dataframed with cleaned specified columns 
     """
     for var in varlist:
         df[var] = df[var].astype(str)
@@ -76,7 +77,7 @@ def retrieve_text_html(df, varlist):
     -df (Dataframe): Dataframed to which the cleaning is going to be applied
     -varlist: List of columns to be cleaned
     Return:
-        Dataframed with cleaned specified columns 
+    Dataframed with cleaned specified columns 
     """
     for var in varlist:
         df[var] = df[var].astype(str)
@@ -90,7 +91,9 @@ def create_news_csv():
     Create dataframe with all the news information obtained 
     from the The Guardian API  
     Inputs:
-    - none, it uses the json_files obtained from 
+    - none, it uses the json_files obtained from the api requests 
+    Return:
+    -None, it creates compiled csv with results.
     """
     current_dir = os.path.dirname(os.path.realpath(__file__))
     json_directory = os.path.join(current_dir, "json_files")

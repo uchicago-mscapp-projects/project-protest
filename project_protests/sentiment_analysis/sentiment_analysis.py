@@ -26,7 +26,12 @@ guardian_filepath = pathlib.Path(__file__).parent.parent / "newspaper/the_guardi
 def edit_sentiment_dictionary(update_dict = WORDS_TO_UPDATE):
     """
     Edit sentiment dictionary to exclude certain words that are common and
-    neutral in the context but that the nltk dictionary classifies as negative
+    neutral in the context but that the nltk dictionary classifies as negative.
+    Inputs: 
+        update_dict(dict): Dictionary of words to be updated in the dictionary that
+        are going to be considered as neutral.
+    Return:
+    None, it updates vader lexicon dictionary
     """
     sia.lexicon.update(update_dict)
 
@@ -35,8 +40,8 @@ def sentiment_scores(filename, columns_list):
     Calculate sentiment scores for the headline and lead sections of the news
     retrieve by The New York Times and The Guardian API's.
     Inputs:
-     - filename: filename of csv data to open to perform the sentiment analysis in
-    
+    - filename: filename of csv data to open to perform the sentiment analysis in
+    - columns_list: list of columns in which to calculate the sentiment score
     Returns:
     df : Updated df with new columns that classify the sentiment of the given columns
 
