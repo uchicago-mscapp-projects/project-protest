@@ -34,7 +34,8 @@ def create_dirs(tags = query_lst, filters = filters_lst,
             until when to stop looking for articles.
     """
     
-    path = os.path.join(os.getcwd(), "raw_data")
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    path = os.path.join(current_dir, "raw_data")
 
     # Remove directories and JSON files before creating them again if they
     # already existed
