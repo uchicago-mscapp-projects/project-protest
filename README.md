@@ -18,7 +18,7 @@ To run the project the following steps need to be followed:
 1. Clone repository
 2. Run ```pip install --user dash-bootstrap-components``` in the terminal
 3. Create a python file named ```config.py``` in the ```project_protests``` package directory with the API keys for the New York Times and The Guardian API (keys sent privately)
-4. Run ```poetry install``` to install the necessary packages
+4. Go back to root folder ```30122-project-project-protest``` and run ```poetry install``` to install the necessary packages
 5. Run ```poetry shell``` to activate the virtual environment
 6. From the directory *“30122-project-project-protest"* run from the command line ```poetry run python -m project_protests <arguments>```. Arguments are optional.
 
