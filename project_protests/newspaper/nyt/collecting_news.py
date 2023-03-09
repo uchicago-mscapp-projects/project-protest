@@ -40,7 +40,10 @@ def create_dirs(tags = query_lst, filters = filters_lst,
     # Remove directories and JSON files before creating them again if they
     # already existed
     if os.path.exists(path):
-        shutil.rmtree(path, ignore_errors = True)
+        folders = os.listdir(path)
+        folders.remove("nyt_articles.csv")
+        for folder in folders:
+            shutil.rmtree(os.path.join(path, folder), ignore_errors = True)
     
     begin_year = int(begin_date[:4])
     end_year = int(end_date[:4])
@@ -89,7 +92,9 @@ def get_json(tags, filters, begin_date, end_date):
     month_name = calendar.month_name[int(begin_date[4:6])]
     resp = make_request(tags, filters, begin_date, end_date)
     resp_json = json.loads(resp.text)
-    file_name = os.path.join("raw_data", year, month_name, "nyt_0.json")
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    file_name = os.path.join(current_dir, "raw_data", year, month_name,
+                            "nyt_0.json")
     
     with open(file_name, "w") as f:
         json.dump(resp_json, f, indent=1)
@@ -107,7 +112,8 @@ def get_json(tags, filters, begin_date, end_date):
         resp = make_request(tags, filters, begin_date, end_date, page_str)
         resp_json = json.loads(resp.text)
         name = "nyt_" + page_str + ".json"
-        file_name = os.path.join("raw_data", year, month_name, name)
+        file_name = os.path.join(current_dir, "raw_data", year, month_name,
+                                name)
         
         with open(file_name, "w") as f:
             json.dump(resp_json, f, indent=1)
