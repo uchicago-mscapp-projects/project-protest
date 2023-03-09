@@ -24,7 +24,7 @@ To run the project the following steps need to be followed:
 
 When running the last command without any arguments, you will run the dashboard application by default. You can also call up to two arguments:
 1. ```compile_news```: Using the json files obtained from scraping data from The New York Times and The Guardian, it cleans and compile to create a compiled csv with the newspaper information. This argument can be combined with collect_data.
-2. ```run```: This argument performs the two tasks described in compile_news and dashboard. This argument can be combined with collect_data.  
+2. ```run```: This argument performs the two tasks described in compile_news and to run the dashboard. This argument can be combined with collect_data.  
 3. ```collect_data```: This argument collect the data from The Guardian and The New York Times API and store the json files obtained from the requests. This argument can only be called combined with either compile_news or run and can only be included as the last argument. (The approximate run time for this argument when using the default query arguments is approximate 25 minutes).
 
 ## Output
