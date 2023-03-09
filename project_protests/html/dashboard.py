@@ -13,7 +13,7 @@ from dash.dependencies import Input, Output
 from project_protests.html.text_inputs import HTML_TEXT , DATA_TEXT
 from project_protests.visualizations.protest_viz import protest_by_city
 from project_protests.visualizations.pairwise_viz import visualize_similarity
-from project_protests.visualizations.news_viz import news_counts
+from project_protests.visualizations.news_viz import news_counts, month_corr
 from project_protests.visualizations.sentiment_viz import visualize_sentiment_scores
 from project_protests.visualizations.budget_viz import budget_viz
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.PULSE],suppress_callback_exceptions=True)
@@ -21,7 +21,7 @@ app = dash.Dash(__name__,external_stylesheets=[dbc.themes.PULSE],suppress_callba
 fig_protest = protest_by_city()
 fig_similarity = visualize_similarity()
 fig_news = news_counts()
-# fig_month_corr = month_corr()
+fig_month_corr = month_corr()
 fig_budget = budget_viz()
 background_color = "background-color : rgb(255, 251, 250)"
 style_h1 = {"padding":"25px", "text-align":"center", "border-width": "1px", "border-style": "solid"} 
@@ -109,6 +109,12 @@ def render_page_content(pathname):
                 html.H2(HTML_TEXT["subtitles"]["News"], style=style_h2),
                 html.P(HTML_TEXT["graph_info"]["news"], style=style_p),
                 dcc.Graph(id="news_counts",figure=fig_news),
+                html.P("To complement the analysis, we graphed the correlation matrix "
+                "between the different variables, where it is posible to observe that " 
+                "there is a positive correlation between the number of protests and " 
+                "the number of news stories. This relationship was not as strong as we expected "
+                "but again may be due to the upward spike in the protest data after 2020.", style = style_p),
+                dcc.Graph(id="month_corr",figure=fig_month_corr),
                 html.H2(HTML_TEXT["subtitles"]["Sentiment_Score"], style=style_h3),
                 html.P(HTML_TEXT["graph_info"]["sentiment"], style=style_p),
                 html.P(HTML_TEXT["graph_info"]["sentiment_2"], style=style_p),
