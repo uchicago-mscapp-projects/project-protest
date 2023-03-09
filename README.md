@@ -20,7 +20,7 @@ To run the project the following steps need to be followed:
 3. Create a python file named ```config.py``` in the ```project_protests``` package directory with the API keys for the New York Times and The Guardian API (keys sent privately)
 4. Go back to root folder ```30122-project-project-protest``` and run ```poetry install``` to install the necessary packages (will take around 8 minutes to install)
 5. Run ```poetry shell``` to activate the virtual environment
-6. From the directory *“30122-project-project-protest"* run from the command line ```poetry run python -m project_protests <arguments>```. Arguments are optional.
+6. From the directory ```30122-project-project-protest``` run the command line ```poetry run python -m project_protests <arguments>```. Arguments are optional.
 
 When running the last command without any arguments, you will run the dashboard application by default. You can also call up to two arguments:
 1. ```compile_news```: Using the json files obtained from scraping data from The New York Times and The Guardian, it cleans and compile to create a compiled csv with the newspaper information. This argument can be combined with collect_data.
